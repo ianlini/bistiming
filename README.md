@@ -1,6 +1,28 @@
 # bistiming
 A timing and progress bar module for Python.
 
+## Installation
+- Install `bistiming`
+  ```bash
+  pip install bistiming
+  ```
+
+- If you want to use `IterTimer`:
+  - For python < 3:
+
+    ```
+    pip install progressbar
+    ```
+  - For python >= 3:
+
+    ```
+    pip install progressbar33
+    ```
+
+## Testing
+- For the current environment: `python setup test`.
+- For python 2.7.12, 3.4.5, 3.5.2: `tox`.
+
 ## Examples
 - This module provide two context managers for timing: `SimpleTimer` and `IterTimer`.
 
