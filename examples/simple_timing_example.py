@@ -13,11 +13,11 @@ def main():
     with SimpleTimer("Waiting"):
         sleep(1)
 
-    print("\n[Example 3] timer without starting message")
+    print("\n[Example 3] hide starting message")
     with SimpleTimer("Waiting", verbose_start=False):
         sleep(1)
 
-    print("\n[Example 4] timer without ending message")
+    print("\n[Example 4] hide ending message")
     with SimpleTimer("Waiting", verbose_end=False):
         sleep(1)
 
