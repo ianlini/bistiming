@@ -2,8 +2,11 @@
 A timing and progress bar module for Python.
 
 ## Examples
-- see [examples/simple_timing_example.py](examples/simple_timing_example.py) for the examples for `SimpleTimer`
-- output of executing `python examples/simple_timing_example.py`:
+- This module provide two context managers for timing: `SimpleTimer` and `IterTimer`.
+
+### SimpleTimer
+- See [examples/simple_timing_example.py](examples/simple_timing_example.py) for the examples of `SimpleTimer`.
+- The output of executing `python examples/simple_timing_example.py`:
   ```
   [Example 1]
   ...
@@ -34,3 +37,6 @@ A timing and progress bar module for Python.
   [2016-10-17 22:49:48,123] DEBUG: __main__: ...Waiting
   [2016-10-17 22:49:49,125] DEBUG: __main__: ...Waiting done in 0:00:01.001245
   ```
+
+### IterTimer
+- See [examples/progressbar_timing_example.py](examples/progressbar_timing_example.py) for the examples of `IterTimer`.

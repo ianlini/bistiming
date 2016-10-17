@@ -42,5 +42,6 @@ def main():
     with SimpleTimer("Waiting", logger=logger, logging_level=logging.DEBUG):
         sleep(1)
 
+
 if __name__ == '__main__':
     main()

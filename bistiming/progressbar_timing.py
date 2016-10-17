@@ -1,5 +1,4 @@
 import datetime
-
 from progressbar import (ProgressBar, Percentage, UnknownLength,
                          Bar, SimpleProgress, Timer, ETA)
 
