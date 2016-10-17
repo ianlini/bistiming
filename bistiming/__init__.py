@@ -2,7 +2,9 @@ from .simple_timing import SimpleTimer
 try:
     from .progressbar_timing import IterTimer
 except ImportError as exc:
-    if exc.name == "progressbar":
+    import sys
+    if ((sys.version_info[0] < 3 and str(exc) == "No module named progressbar")
+            or exc.name == 'progressbar'):
         def IterTimer(*args, **kwarg):  # pylint: disable=unused-argument
             raise ImportError("please install progressbar module using "
                               "\"pip install progressbar\" in python 2 or "
