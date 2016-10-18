@@ -8,12 +8,12 @@ A timing and progress bar module for Python.
   ```
 
 - If you want to use `IterTimer`:
-  - For python < 3:
+  - For Python < 3:
 
     ```
     pip install progressbar
     ```
-  - For python >= 3:
+  - For Python >= 3:
 
     ```
     pip install progressbar33
