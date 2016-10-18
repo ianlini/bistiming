@@ -1,3 +1,5 @@
+import pkg_resources
+
 from .simple_timing import SimpleTimer
 try:
     from .progressbar_timing import IterTimer
@@ -14,4 +16,4 @@ except ImportError as exc:
 
 
 __all__ = ['progressbar_timing', 'simple_timing']
-__version__ = "0.1.0"
+__version__ = pkg_resources.get_distribution("serialtime").version

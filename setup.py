@@ -2,7 +2,6 @@
 import os
 from setuptools import setup
 
-from bistiming import __version__
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 # read the docs could not compile numpy and c extensions
@@ -18,9 +17,10 @@ else:
 
 setup(
     name='bistiming',
-    version=__version__,
+    version="0.1.0",
     description='A timing and progress bar module for Python.',
-    long_description='A timing and progress bar module for Python.',
+    long_description=("See `github <https://github.com/ianlini/bistiming>`_ "
+                      "for more information."),
     author='ianlini',
     url='https://github.com/ianlini/bistiming',
     setup_requires=setup_requires,
