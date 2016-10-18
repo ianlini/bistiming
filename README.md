@@ -21,7 +21,7 @@ A timing and progress bar module for Python.
 
 ## Testing
 - For the current environment: `python setup test`.
-- For python 2.7.12, 3.4.5, 3.5.2: `tox`.
+- For Python 2.7.12, 3.4.5, 3.5.2 and installation test: `tox`.
 
 ## Examples
 - This module provide two context managers for timing: `SimpleTimer` and `IterTimer`.
