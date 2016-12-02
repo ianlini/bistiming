@@ -37,9 +37,9 @@ class SimpleTimer(object):
         self.elapsed_time = self.end_time - self.start_time
         if self.verbose_end:
             if self.end_in_new_line:
-                msg = ""
+                msg = self.description
             else:
-                msg = "\r\033[K"
-            msg += "{} done in {}".format(self.description, self.elapsed_time)
+                msg = ""
+            msg += " done in {}".format(self.elapsed_time)
             self.log(msg)
 

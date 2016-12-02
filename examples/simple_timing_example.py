@@ -21,7 +21,7 @@ def main():
     with SimpleTimer("Waiting", verbose_end=False):
         sleep(1)
 
-    print("\n[Example 5] rewrite the same line after ending")
+    print("\n[Example 5] write the ending message at the same line")
     with SimpleTimer("Waiting", end_in_new_line=False):
         sleep(1)
 
