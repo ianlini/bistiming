@@ -19,7 +19,7 @@ else:
 
 setup(
     name='bistiming',
-    version="0.1.0",
+    version="0.1.1",
     description='A timing and progress bar module for Python.',
     long_description=("See `github <https://github.com/ianlini/bistiming>`_ "
                       "for more information."),
