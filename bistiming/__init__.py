@@ -16,4 +16,4 @@ except ImportError as exc:
 
 
 __all__ = ['progressbar_timing', 'simple_timing']
-__version__ = pkg_resources.get_distribution("serialtime").version
+__version__ = pkg_resources.get_distribution("bistiming").version
