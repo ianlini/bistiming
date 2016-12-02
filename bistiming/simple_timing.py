@@ -1,7 +1,8 @@
-from __future__ import print_function
 from functools import partial
 import logging
 import datetime
+
+import six
 
 
 class SimpleTimer(object):
@@ -12,7 +13,7 @@ class SimpleTimer(object):
         if logger is not None:
             self.log = partial(logger.log, logging_level)
         else:
-            self.log = print
+            self.log = six.print_
         self.description = prefix + description
         self.verbose_start = verbose_start
         self.verbose_end = verbose_end

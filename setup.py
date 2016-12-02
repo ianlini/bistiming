@@ -13,7 +13,9 @@ else:
         'nose',
         'coverage',
     ]
-    install_requires = []
+    install_requires = [
+        'six',
+    ]
 
 setup(
     name='bistiming',
