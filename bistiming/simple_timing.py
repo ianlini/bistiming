@@ -24,6 +24,7 @@ class SimpleTimer(object):
 
     def start(self, verbose=None, end_in_new_line=None):
         if self.start_time is not None and self.end_time is None:
+            # the timer is already running
             return
         if verbose is None:
             verbose = self.verbose_start
@@ -40,12 +41,14 @@ class SimpleTimer(object):
 
     def pause(self):
         if self.end_time is not None:
+            # the timer is already paused
             return
         self.end_time = datetime.datetime.now()
         self.elapsed_time += self.end_time - self.start_time
 
     def get_elapsed_time(self):
         if self.start_time is None or self.end_time is not None:
+            # the timer is already paused
             return self.elapsed_time
         return self.elapsed_time + (datetime.datetime.now() - self.start_time)
 
