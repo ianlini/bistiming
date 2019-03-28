@@ -20,25 +20,58 @@ class SimpleTimer(object):
         self.end_in_new_line = end_in_new_line
         self.start_time = None
         self.end_time = None
-        self.elapsed_time = None
+        self.elapsed_time = datetime.timedelta()
 
-    def __enter__(self):
-        if self.verbose_start:
-            if self.end_in_new_line:
+    def start(self, verbose=None, end_in_new_line=None):
+        if self.start_time is not None and self.end_time is None:
+            return
+        if verbose is None:
+            verbose = self.verbose_start
+        if end_in_new_line is None:
+            end_in_new_line = self.end_in_new_line
+        if verbose:
+            if end_in_new_line:
                 self.log(self.description)
             else:
                 self.log(self.description, end="", flush=True)
-
+        self.end_time = None
         self.start_time = datetime.datetime.now()
         return self
 
-    def __exit__(self, exc_type, exc, exc_tb):
+    def pause(self):
+        if self.end_time is not None:
+            return
         self.end_time = datetime.datetime.now()
-        self.elapsed_time = self.end_time - self.start_time
-        if self.verbose_end:
-            if self.end_in_new_line:
-                msg = self.description
+        self.elapsed_time += self.end_time - self.start_time
+
+    def get_elapsed_time(self):
+        if self.start_time is None or self.end_time is not None:
+            return self.elapsed_time
+        return self.elapsed_time + (datetime.datetime.now() - self.start_time)
+
+    def log_elapsed_time(self, prefix="Elapsed time: "):
+        self.log("{}{}".format(prefix, self.get_elapsed_time()))
+
+    def split(self, verbose=None, end_in_new_line=None):
+        elapsed_time = self.get_elapsed_time()
+        self.start_time += elapsed_time
+        self.elapsed_time = datetime.timedelta()
+        if verbose is None:
+            verbose = self.verbose_end
+        if end_in_new_line is None:
+            end_in_new_line = self.end_in_new_line
+        if verbose:
+            if end_in_new_line:
+                self.log("{} done in {}".format(self.description, elapsed_time))
             else:
-                msg = ""
-            msg += " done in {}".format(self.elapsed_time)
-            self.log(msg)
+                self.log(" done in {}".format(elapsed_time))
+
+    def reset(self):
+        pass
+
+    def __enter__(self):
+        return self.start()
+
+    def __exit__(self, exc_type, exc, exc_tb):
+        self.pause()
+        self.split()
