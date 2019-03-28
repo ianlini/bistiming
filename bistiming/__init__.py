@@ -1,6 +1,6 @@
 import pkg_resources
 
-from .simple_timing import SimpleTimer
+from .simple_timing import SimpleTimer  # noqa: F401
 try:
     from .progressbar_timing import IterTimer
 except ImportError as exc:

@@ -42,4 +42,3 @@ class SimpleTimer(object):
                 msg = ""
             msg += " done in {}".format(self.elapsed_time)
             self.log(msg)
-
