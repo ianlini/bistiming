@@ -3,11 +3,6 @@ notifications:
     on_success: change
     on_failure: always
 
-addons:
-  apt:
-    packages:
-      - libhdf5-serial-dev
-
 sudo: false
 language: python
 matrix:
