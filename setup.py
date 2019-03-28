@@ -27,10 +27,14 @@ setup(
     url='https://github.com/ianlini/bistiming',
     setup_requires=setup_requires,
     install_requires=install_requires,
+    license="BSD 2-Clause",
     classifiers=[
+        'License :: OSI Approved :: BSD License',
         'Topic :: Utilities',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     test_suite='nose.collector',
     packages=[
