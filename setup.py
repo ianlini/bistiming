@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
@@ -37,10 +37,5 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     test_suite='nose.collector',
-    packages=[
-        'bistiming',
-    ],
-    package_dir={
-        'bistiming': 'bistiming',
-    },
+    packages=find_packages(exclude=('examples', 'examples.*')),
 )
