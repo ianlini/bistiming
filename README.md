@@ -4,20 +4,19 @@
 [![](https://img.shields.io/pypi/v/bistiming.svg)](https://pypi.org/project/bistiming/)
 [![](https://img.shields.io/pypi/l/bistiming.svg)](https://pypi.org/project/bistiming/)
 
-A timing and progress bar module for Python.
+A logging-friendly timing module for Python.
 
 ## Installation
 
-* Install `bistiming`
-
-  ```bash
-  pip install bistiming
-  ```
+```bash
+pip install bistiming
+```
 
 ## Testing
 
-* For the current environment: `python setup test`.
-* For Python 2.7.12, 3.4.5, 3.5.2 and installation test: `tox`.
+* Linter: `flake8`.
+* For the current environment: `python setup.py test`.
+* For Python 2.7, 3.5, 3.6, 3.7, flake8 and installation test: `tox`.
 
 ### Examples
 
