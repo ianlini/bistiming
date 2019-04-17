@@ -42,7 +42,8 @@ class Stopwatch(object):
         prefix : str
             The prefix added to ``description``. (default: ``"..."``)
         verbose : bool
-            If ``False``, turn off all the logs. (default: ``True``)
+            If ``False``, turn off all the logs, that is, ``verbose_start`` and ``verbose_end``
+            will be set to ``False``. (default: ``True``)
         """
         if logger is not None:
             self.log = partial(logger.log, logging_level)
@@ -63,9 +64,22 @@ class Stopwatch(object):
         self.splitted_elapsed_time = []
 
     def start(self, verbose=None, end_in_new_line=None):
+        """Start the stopwatch if it is paused.
+
+        If the stopwatch is already started, then nothing will happen.
+
+        Parameters
+        ----------
+        verbose : Optional[bool]
+            Wether to log. If ``None``, use ``verbose_start`` set during ``__init__``.
+            (default: ``None``)
+        end_in_new_line : Optional[bool]]
+            If ``False``, prevent logging the trailing new line. If ``None``, use
+            ``end_in_new_line`` set during ``__init__``. (default: ``None``)
+        """
         if self._start_time is not None and self._end_time is None:
-            # the timer is already running
-            return
+            # the stopwatch is already running
+            return self
         if verbose is None:
             verbose = self.verbose_start
         if verbose:
@@ -80,22 +94,50 @@ class Stopwatch(object):
         return self
 
     def pause(self):
+        """Pause the stopwatch.
+
+        If the stopwatch is already paused, nothing will happen.
+        """
         if self._end_time is not None:
-            # the timer is already paused
+            # the stopwatch is already paused
             return
         self._end_time = datetime.datetime.now()
         self._elapsed_time += self._end_time - self._start_time
 
     def get_elapsed_time(self):
+        """Get the elapsed time of the current split.
+        """
         if self._start_time is None or self._end_time is not None:
-            # the timer is already paused
+            # the stopwatch is paused
             return self._elapsed_time
         return self._elapsed_time + (datetime.datetime.now() - self._start_time)
 
     def log_elapsed_time(self, prefix="Elapsed time: "):
+        """Log the elapsed time of the current split.
+
+        Parameters
+        ----------
+        prefix : str
+            The prefix of the log. (default: ``"Elapsed time: "``)
+        """
         self.log("{}{}".format(prefix, self.get_elapsed_time()))
 
     def split(self, verbose=None, end_in_new_line=None):
+        """Save the elapsed time of the current split and restart the stopwatch.
+
+        The current elapsed time will be appended to the ``self.splitted_elapsed_time`` list and
+        added to ``self.cumulative_elapsed_time``. If the stopwatch is paused, then it will remain
+        paused. Otherwise, it will continue running.
+
+        Parameters
+        ----------
+        verbose : Optional[bool]
+            Wether to log. If ``None``, use ``verbose_end`` set during ``__init__``.
+            (default: ``None``)
+        end_in_new_line : Optional[bool]]
+            Wether to log the description. If ``None``, use ``end_in_new_line`` set during
+            ``__init__``. (default: ``None``)
+        """
         elapsed_time = self.get_elapsed_time()
         self.splitted_elapsed_time.append(elapsed_time)
         self.cumulative_elapsed_time += elapsed_time
