@@ -5,7 +5,7 @@ import datetime
 import six
 
 
-class SimpleTimer(object):
+class Stopwatch(object):
 
     def __init__(self, description="", logger=None, logging_level=logging.INFO,
                  verbose_start=True, verbose_end=True, end_in_new_line=True,

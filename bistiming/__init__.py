@@ -1,7 +1,9 @@
 import pkg_resources
 
-from .simple_timing import SimpleTimer  # noqa: F401
+from .stopwatch import Stopwatch  # noqa: F401
 
 
-__all__ = ['progressbar_timing', 'simple_timing']
+SimpleTimer = Stopwatch  # backward-compatible to < 0.2
+
+
 __version__ = pkg_resources.get_distribution("bistiming").version
