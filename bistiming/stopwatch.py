@@ -9,13 +9,13 @@ class Stopwatch(object):
 
     def __init__(self, description="", logger=None, logging_level=logging.INFO,
                  verbose_start=True, verbose_end=True, end_in_new_line=True,
-                 prefix="..."):
+                 prefix="...", verbose=True):
         """A logging-friendly stopwatch with splitting function.
 
         Parameters
         ----------
         description : str
-            The message to show at starting time (entering with-block or calling ``start()``)
+            The log to show at starting time (entering with-block or calling ``start()``)
             or ending time (exiting with-block or calling ``split()``). (default: ``""``)
         logger : Callable
             A ``Callable`` that accepts ``logging_level`` as its first argument and a ``str`` to
@@ -34,19 +34,27 @@ class Stopwatch(object):
             Wether to log at ending time (exiting with-block or calling ``split()``).
             (default: ``True``)
         end_in_new_line : bool
-            Wether to log the ending message in a new line. If ``False``, the starting message will
-            not have a trailing new line, so the ending message can be logged in the same line.
+            Wether to log the ending log in a new line. If ``False``, the starting log will
+            not have a trailing new line, so the ending log can be logged in the same line.
+            This requires ``logger`` to have ``end`` and ``flush`` parameters, or just
+            ``logger=None``.
             (default: ``True``)
         prefix : str
-            The prefix added to ``description``.
+            The prefix added to ``description``. (default: ``"..."``)
+        verbose : bool
+            If ``False``, turn off all the logs. (default: ``True``)
         """
         if logger is not None:
             self.log = partial(logger.log, logging_level)
         else:
             self.log = six.print_
         self.description = prefix + description
-        self.verbose_start = verbose_start
-        self.verbose_end = verbose_end
+        if verbose:
+            self.verbose_start = verbose_start
+            self.verbose_end = verbose_end
+        else:
+            self.verbose_start = False
+            self.verbose_end = False
         self.end_in_new_line = end_in_new_line
         self._start_time = None
         self._end_time = None
@@ -60,9 +68,9 @@ class Stopwatch(object):
             return
         if verbose is None:
             verbose = self.verbose_start
-        if end_in_new_line is None:
-            end_in_new_line = self.end_in_new_line
         if verbose:
+            if end_in_new_line is None:
+                end_in_new_line = self.end_in_new_line
             if end_in_new_line:
                 self.log(self.description)
             else:
@@ -95,9 +103,9 @@ class Stopwatch(object):
         self._elapsed_time = datetime.timedelta()
         if verbose is None:
             verbose = self.verbose_end
-        if end_in_new_line is None:
-            end_in_new_line = self.end_in_new_line
         if verbose:
+            if end_in_new_line is None:
+                end_in_new_line = self.end_in_new_line
             if end_in_new_line:
                 self.log("{} done in {}".format(self.description, elapsed_time))
             else:
