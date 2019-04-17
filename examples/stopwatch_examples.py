@@ -10,8 +10,47 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def no_arg_example():
-    print("[no_arg_example]")
+def basic_example():
+    print("[basic_example]")
+    timer = Stopwatch()
+    sleep(0.1)
+    timer.log_elapsed_time()  # 0:00:00
+    timer.start()
+    sleep(0.1)
+    timer.log_elapsed_time()  # 0:00:00.1
+    sleep(0.1)
+    timer.pause()
+    timer.log_elapsed_time()  # 0:00:00.2
+    sleep(0.1)
+    timer.log_elapsed_time()  # 0:00:00.2
+    timer.split()  # 0:00:00.2
+    timer.log_elapsed_time()  # 0:00:00
+    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.2
+    sleep(0.1)
+    timer.start()
+    sleep(0.1)
+    timer.log_elapsed_time()  # 0:00:00.1
+    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.3
+    timer.split()  # 0:00:00.1
+    sleep(0.1)
+    timer.pause()
+    timer.split()  # 0:00:00.1
+    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.4
+    print("timer.splitted_elapsed_time:", [str(delta) for delta in timer.splitted_elapsed_time])
+    # [0:00:00.2, 0:00:00.1, 0:00:00.1]
+    timer.reset()
+
+    timer.log_elapsed_time()  # 0:00:00
+    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00
+    print("timer.splitted_elapsed_time:", timer.splitted_elapsed_time)  # []
+    sleep(0.1)
+    timer.start()
+    sleep(0.1)
+    timer.log_elapsed_time()  # 0:00:00.1
+
+
+def basic_context_manager_example():
+    print("[basic_context_manager_example]")
     with Stopwatch():
         sleep(1)
 
@@ -76,11 +115,14 @@ def cumulative_elapsed_time_example():
         print("timer.get_elapsed_time():", timer.get_elapsed_time())  # 0:00:01....
     print("timer.splitted_elapsed_time:", timer.splitted_elapsed_time)
     # [datetime.timedelta(seconds=1), datetime.timedelta(seconds=1)]
-    print("timer.cumulative_elapsed_time:", timer.cumulative_elapsed_time)  # 0:00:02....
+    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())
+    # 0:00:02....
 
 
 def main():
-    no_arg_example()
+    basic_example()
+    print()
+    basic_context_manager_example()
     print()
     description_example()
     print()

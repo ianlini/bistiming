@@ -57,11 +57,7 @@ class Stopwatch(object):
             self.verbose_start = False
             self.verbose_end = False
         self.end_in_new_line = end_in_new_line
-        self._start_time = None
-        self._end_time = None
-        self._elapsed_time = datetime.timedelta()
-        self.cumulative_elapsed_time = datetime.timedelta()
-        self.splitted_elapsed_time = []
+        self.reset()
 
     def start(self, verbose=None, end_in_new_line=None):
         """Start the stopwatch if it is paused.
@@ -112,6 +108,11 @@ class Stopwatch(object):
             return self._elapsed_time
         return self._elapsed_time + (datetime.datetime.now() - self._start_time)
 
+    def get_cumulative_elapsed_time(self):
+        """Get the cumulative elapsed time without considering splits.
+        """
+        return self._cumulative_elapsed_time + self.get_elapsed_time()
+
     def log_elapsed_time(self, prefix="Elapsed time: "):
         """Log the elapsed time of the current split.
 
@@ -125,9 +126,8 @@ class Stopwatch(object):
     def split(self, verbose=None, end_in_new_line=None):
         """Save the elapsed time of the current split and restart the stopwatch.
 
-        The current elapsed time will be appended to the ``self.splitted_elapsed_time`` list and
-        added to ``self.cumulative_elapsed_time``. If the stopwatch is paused, then it will remain
-        paused. Otherwise, it will continue running.
+        The current elapsed time will be appended to the ``self.splitted_elapsed_time`` list. If
+        the stopwatch is paused, then it will remain paused. Otherwise, it will continue running.
 
         Parameters
         ----------
@@ -140,7 +140,7 @@ class Stopwatch(object):
         """
         elapsed_time = self.get_elapsed_time()
         self.splitted_elapsed_time.append(elapsed_time)
-        self.cumulative_elapsed_time += elapsed_time
+        self._cumulative_elapsed_time += elapsed_time
         self._start_time += elapsed_time
         self._elapsed_time = datetime.timedelta()
         if verbose is None:
@@ -154,7 +154,13 @@ class Stopwatch(object):
                 self.log(" done in {}".format(elapsed_time))
 
     def reset(self):
-        pass
+        """Reset the stopwatch.
+        """
+        self._start_time = None
+        self._end_time = None
+        self._elapsed_time = datetime.timedelta()
+        self._cumulative_elapsed_time = datetime.timedelta()
+        self.splitted_elapsed_time = []
 
     def __enter__(self):
         return self.start()
