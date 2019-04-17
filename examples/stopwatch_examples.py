@@ -22,20 +22,26 @@ def description_example():
         sleep(1)
 
 
-def hide_starting_message_example():
-    print("[hide_starting_message_example] hide starting message")
+def hide_starting_log_example():
+    print("[hide_starting_log_example] hide starting log")
     with Stopwatch("Waiting", verbose_start=False):
         sleep(1)
 
 
-def hide_ending_message_example():
-    print("[hide_ending_message_example] hide ending message")
+def hide_ending_log_example():
+    print("[hide_ending_log_example] hide ending log")
     with Stopwatch("Waiting", verbose_end=False):
         sleep(1)
 
 
-def same_line_message_example():
-    print("[same_line_message_example] write the ending message at the same line")
+def hide_all_logs_example():
+    print("[hide_all_logs_example] hide all logs")
+    with Stopwatch(verbose=False):
+        sleep(1)
+
+
+def same_line_log_example():
+    print("[same_line_log_example] write the ending log at the same line")
     with Stopwatch("Waiting", end_in_new_line=False):
         sleep(1)
 
@@ -78,11 +84,13 @@ def main():
     print()
     description_example()
     print()
-    hide_starting_message_example()
+    hide_starting_log_example()
     print()
-    hide_ending_message_example()
+    hide_ending_log_example()
     print()
-    same_line_message_example()
+    hide_all_logs_example()
+    print()
+    same_line_log_example()
     print()
     changing_prefix_example()
     print()
