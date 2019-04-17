@@ -5,7 +5,7 @@ import datetime
 import six
 
 
-class SimpleTimer(object):
+class Stopwatch(object):
 
     def __init__(self, description="", logger=None, logging_level=logging.INFO,
                  verbose_start=True, verbose_end=True, end_in_new_line=True,
@@ -18,14 +18,14 @@ class SimpleTimer(object):
         self.verbose_start = verbose_start
         self.verbose_end = verbose_end
         self.end_in_new_line = end_in_new_line
-        self.start_time = None
-        self.end_time = None
-        self.elapsed_time = datetime.timedelta()
+        self._start_time = None
+        self._end_time = None
+        self._elapsed_time = datetime.timedelta()
         self.cumulative_elapsed_time = datetime.timedelta()
         self.splitted_elapsed_time = []
 
     def start(self, verbose=None, end_in_new_line=None):
-        if self.start_time is not None and self.end_time is None:
+        if self._start_time is not None and self._end_time is None:
             # the timer is already running
             return
         if verbose is None:
@@ -37,22 +37,22 @@ class SimpleTimer(object):
                 self.log(self.description)
             else:
                 self.log(self.description, end="", flush=True)
-        self.end_time = None
-        self.start_time = datetime.datetime.now()
+        self._end_time = None
+        self._start_time = datetime.datetime.now()
         return self
 
     def pause(self):
-        if self.end_time is not None:
+        if self._end_time is not None:
             # the timer is already paused
             return
-        self.end_time = datetime.datetime.now()
-        self.elapsed_time += self.end_time - self.start_time
+        self._end_time = datetime.datetime.now()
+        self._elapsed_time += self._end_time - self._start_time
 
     def get_elapsed_time(self):
-        if self.start_time is None or self.end_time is not None:
+        if self._start_time is None or self._end_time is not None:
             # the timer is already paused
-            return self.elapsed_time
-        return self.elapsed_time + (datetime.datetime.now() - self.start_time)
+            return self._elapsed_time
+        return self._elapsed_time + (datetime.datetime.now() - self._start_time)
 
     def log_elapsed_time(self, prefix="Elapsed time: "):
         self.log("{}{}".format(prefix, self.get_elapsed_time()))
@@ -61,8 +61,8 @@ class SimpleTimer(object):
         elapsed_time = self.get_elapsed_time()
         self.splitted_elapsed_time.append(elapsed_time)
         self.cumulative_elapsed_time += elapsed_time
-        self.start_time += elapsed_time
-        self.elapsed_time = datetime.timedelta()
+        self._start_time += elapsed_time
+        self._elapsed_time = datetime.timedelta()
         if verbose is None:
             verbose = self.verbose_end
         if end_in_new_line is None:

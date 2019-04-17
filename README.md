@@ -20,6 +20,6 @@ pip install bistiming
 
 ### Examples
 
-* See [examples/simple_timing_example.py](examples/simple_timing_example.py) for the examples of `SimpleTimer`.
-* The output of executing `python examples/simple_timing_example.py`:
-  ![The output of executing python examples/simple_timing_example.py](examples/simple_timing_example.gif)
+* See [examples/stopwatch_examples.py](examples/stopwatch_examples.py) for the examples of `Stopwatch`.
+* The output of executing `python examples/stopwatch_examples.py`:
+  ![The output of executing python examples/stopwatch_examples.py](examples/simple_timing_example.gif)

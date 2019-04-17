@@ -1,7 +1,7 @@
 from time import sleep
 import logging
 
-from bistiming import SimpleTimer
+from bistiming import Stopwatch
 
 
 logging.basicConfig(
@@ -12,55 +12,55 @@ logger = logging.getLogger(__name__)
 
 def no_arg_example():
     print("[no_arg_example]")
-    with SimpleTimer():
+    with Stopwatch():
         sleep(1)
 
 
 def description_example():
     print("[description_example] stopwatch with description")
-    with SimpleTimer("Waiting"):
+    with Stopwatch("Waiting"):
         sleep(1)
 
 
 def hide_starting_message_example():
     print("[hide_starting_message_example] hide starting message")
-    with SimpleTimer("Waiting", verbose_start=False):
+    with Stopwatch("Waiting", verbose_start=False):
         sleep(1)
 
 
 def hide_ending_message_example():
     print("[hide_ending_message_example] hide ending message")
-    with SimpleTimer("Waiting", verbose_end=False):
+    with Stopwatch("Waiting", verbose_end=False):
         sleep(1)
 
 
 def same_line_message_example():
     print("[same_line_message_example] write the ending message at the same line")
-    with SimpleTimer("Waiting", end_in_new_line=False):
+    with Stopwatch("Waiting", end_in_new_line=False):
         sleep(1)
 
 
 def changing_prefix_example():
     print("[changing_prefix_example] change the prefix")
-    with SimpleTimer("Waiting", prefix="[bistiming] "):
+    with Stopwatch("Waiting", prefix="[bistiming] "):
         sleep(1)
 
 
 def logging_example():
     print("[logging_example] use python logging module")
-    with SimpleTimer("Waiting", logger=logger):
+    with Stopwatch("Waiting", logger=logger):
         sleep(1)
 
 
 def logging_level_example():
     print("[logging_level_example] use python logging module with different log level")
-    with SimpleTimer("Waiting", logger=logger, logging_level=logging.DEBUG):
+    with Stopwatch("Waiting", logger=logger, logging_level=logging.DEBUG):
         sleep(1)
 
 
 def cumulative_elapsed_time_example():
     print("[cumulative_elapsed_time_example] use python logging module with different log level")
-    timer = SimpleTimer("Waiting")
+    timer = Stopwatch("Waiting")
     with timer:
         sleep(1)
     sleep(1)
@@ -74,22 +74,22 @@ def cumulative_elapsed_time_example():
 
 
 def main():
-    # no_arg_example()
-    # print()
-    # description_example()
-    # print()
-    # hide_starting_message_example()
-    # print()
-    # hide_ending_message_example()
-    # print()
-    # same_line_message_example()
-    # print()
-    # changing_prefix_example()
-    # print()
-    # logging_example()
-    # print()
-    # logging_level_example()
-    # print()
+    no_arg_example()
+    print()
+    description_example()
+    print()
+    hide_starting_message_example()
+    print()
+    hide_ending_message_example()
+    print()
+    same_line_message_example()
+    print()
+    changing_prefix_example()
+    print()
+    logging_example()
+    print()
+    logging_level_example()
+    print()
     cumulative_elapsed_time_example()
 
 
