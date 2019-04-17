@@ -21,6 +21,8 @@ class SimpleTimer(object):
         self.start_time = None
         self.end_time = None
         self.elapsed_time = datetime.timedelta()
+        self.cumulative_elapsed_time = datetime.timedelta()
+        self.splitted_elapsed_time = []
 
     def start(self, verbose=None, end_in_new_line=None):
         if self.start_time is not None and self.end_time is None:
@@ -57,6 +59,8 @@ class SimpleTimer(object):
 
     def split(self, verbose=None, end_in_new_line=None):
         elapsed_time = self.get_elapsed_time()
+        self.splitted_elapsed_time.append(elapsed_time)
+        self.cumulative_elapsed_time += elapsed_time
         self.start_time += elapsed_time
         self.elapsed_time = datetime.timedelta()
         if verbose is None:
