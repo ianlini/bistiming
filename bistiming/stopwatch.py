@@ -10,6 +10,36 @@ class Stopwatch(object):
     def __init__(self, description="", logger=None, logging_level=logging.INFO,
                  verbose_start=True, verbose_end=True, end_in_new_line=True,
                  prefix="..."):
+        """A logging-friendly stopwatch with splitting function.
+
+        Parameters
+        ----------
+        description : str
+            The message to show at starting time (entering with-block or calling ``start()``)
+            or ending time (exiting with-block or calling ``split()``). (default: ``""``)
+        logger : Callable
+            A ``Callable`` that accepts ``logging_level`` as its first argument and a ``str`` to
+            log as its first argument (basically, a ``logging.Logger`` object). If ``None``, use
+            ``six.print_``, which is similar to the built-in ``print`` in Python 3. When using with
+            ``end_in_new_line=True``, it requires ``end`` and ``flush`` parameters.
+            (default: ``None``)
+        logging_level : int
+            If ``logger`` is not ``None``, this is the first argument to be passed to ``logger``.
+            Usually, this should be ``logging.{DEBUG, INFO, WARNING, ERROR, CRITICAL}``.
+            (default: ``logging.INFO``)
+        verbose_start : bool
+            Wether to log at starting time (entering with-block or calling ``start()``).
+            (default: ``True``)
+        verbose_end : bool
+            Wether to log at ending time (exiting with-block or calling ``split()``).
+            (default: ``True``)
+        end_in_new_line : bool
+            Wether to log the ending message in a new line. If ``False``, the starting message will
+            not have a trailing new line, so the ending message can be logged in the same line.
+            (default: ``True``)
+        prefix : str
+            The prefix added to ``description``.
+        """
         if logger is not None:
             self.log = partial(logger.log, logging_level)
         else:
