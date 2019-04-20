@@ -15,6 +15,7 @@ jedi = "*"
 autopep8 = "*"
 sphinx = "*"
 twine = "*"
+doc8 = "*"
 
 [packages]
 six = "*"
