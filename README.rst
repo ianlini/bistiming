@@ -5,7 +5,7 @@ BisTiming
 .. image:: https://img.shields.io/pypi/v/bistiming.svg
    :target: https://pypi.org/project/bistiming/
 .. image:: https://img.shields.io/pypi/l/bistiming.svg
-   :target: https://pypi.org/project/bistiming/
+   :target: https://github.com/ianlini/bistiming/blob/master/LICENSE
 
 A logging-friendly timing module for Python.
 
@@ -23,28 +23,22 @@ Installation
 
    pip install bistiming
 
-Getting started
+Getting Started
 ---------------
 
-BisTiming has a context manager interface that let you log the running time of a block
+BisTiming has a context manager interface that let you log the running time of a code block
 easily, and it also has low-level APIs that let you time multiple segments or loops of
 code easily.
 
-See `examples/stopwatch_examples.py <examples/stopwatch_examples.py>`_ for all the useful
-examples of ``Stopwatch``.
+See `examples/stopwatch_examples.py <https://github.com/ianlini/bistiming/blob/master/examples/stopwatch_examples.py>`_
+for all the useful examples of ``Stopwatch``.
 
 Low-level API
 ++++++++++++++++++++++
 
-Context manager
+Context Manager
 ++++++++++++++++++++++
 
-API reference
+Documentation
 -------------
-
-Testing
--------
-
-* Linter: ``flake8``.
-* For the current environment: ``python setup.py test``.
-* For Python 2.7, 3.5, 3.6, 3.7, flake8 and installation test: ``tox``.
+See `documentation <https://bistiming.readthedocs.io>`_ for more information.
