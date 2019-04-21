@@ -6,6 +6,8 @@ BisTiming
    :target: https://pypi.org/project/bistiming/
 .. image:: https://img.shields.io/pypi/l/bistiming.svg
    :target: https://github.com/ianlini/bistiming/blob/master/LICENSE
+.. image:: https://img.shields.io/github/stars/ianlini/bistiming.svg?style=social
+   :target: https://github.com/ianlini/bistiming
 
 A logging-friendly timing module for Python.
 
@@ -41,4 +43,4 @@ Context Manager
 
 Documentation
 -------------
-See `documentation <https://bistiming.readthedocs.io>`_ for more information.
+See the `documentation <https://bistiming.readthedocs.io>`_ for more information.
