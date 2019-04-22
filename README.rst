@@ -2,6 +2,8 @@ BisTiming
 =========
 .. image:: https://img.shields.io/travis/ianlini/bistiming/master.svg
    :target: https://travis-ci.org/ianlini/bistiming
+.. image:: https://readthedocs.org/projects/pip/badge/
+   :target: https://bistiming.readthedocs.io/
 .. image:: https://img.shields.io/pypi/v/bistiming.svg
    :target: https://pypi.org/project/bistiming/
 .. image:: https://img.shields.io/pypi/l/bistiming.svg
