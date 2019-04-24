@@ -3,7 +3,7 @@ import os
 from setuptools import setup, find_packages
 
 
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+on_rtd = os.environ.get('READTHEDOCS') == 'True'
 # read the docs could not compile numpy and c extensions
 if on_rtd:
     setup_requires = []
@@ -17,12 +17,23 @@ else:
         'six',
     ]
 
+
+description = """\
+A logging-friendly stopwatch and profiling tool for Python."""
+
+long_description = """\
+Please visit  the `GitHub repository <https://github.com/ianlini/bistiming>`_
+for more information.\n
+"""
+with open('README.rst') as fp:
+    long_description += fp.read()
+
+
 setup(
     name='bistiming',
     version="0.3.0",
-    description='A timing and progress bar module for Python.',
-    long_description=("See `github <https://github.com/ianlini/bistiming>`_ "
-                      "for more information."),
+    description=description,
+    long_description=long_description,
     author='ianlini',
     url='https://github.com/ianlini/bistiming',
     setup_requires=setup_requires,

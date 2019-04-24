@@ -11,7 +11,7 @@ BisTiming
 .. image:: https://img.shields.io/github/stars/ianlini/bistiming.svg?style=social
    :target: https://github.com/ianlini/bistiming
 
-A logging-friendly timing module for Python.
+A logging-friendly stopwatch and profiling tool for Python.
 
 When we search the stopwatch or timing module for Python on the internet, we can find a
 lot of code snippets, but none of them is powerful or convenient enough to do our daily
