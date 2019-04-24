@@ -121,7 +121,7 @@ class Stopwatch(object):
     def split(self, verbose=None, end_in_new_line=None):
         """Save the elapsed time of the current split and restart the stopwatch.
 
-        The current elapsed time will be appended to the ``self.splitted_elapsed_time`` list. If
+        The current elapsed time will be appended to the ``self.split_elapsed_time`` list. If
         the stopwatch is paused, then it will remain paused. Otherwise, it will continue running.
 
         Parameters
@@ -133,9 +133,8 @@ class Stopwatch(object):
             ``__init__``.
         """
         elapsed_time = self.get_elapsed_time()
-        self.splitted_elapsed_time.append(elapsed_time)
+        self.split_elapsed_time.append(elapsed_time)
         self._cumulative_elapsed_time += elapsed_time
-        self._start_time += elapsed_time
         self._elapsed_time = datetime.timedelta()
         if verbose is None:
             verbose = self.verbose_end
@@ -146,6 +145,7 @@ class Stopwatch(object):
                 self.log("{} done in {}".format(self.description, elapsed_time))
             else:
                 self.log(" done in {}".format(elapsed_time))
+        self._start_time = datetime.datetime.now()
 
     def reset(self):
         """Reset the stopwatch.
@@ -154,7 +154,7 @@ class Stopwatch(object):
         self._end_time = None
         self._elapsed_time = datetime.timedelta()
         self._cumulative_elapsed_time = datetime.timedelta()
-        self.splitted_elapsed_time = []
+        self.split_elapsed_time = []
 
     def __enter__(self):
         """Call ``start()``.

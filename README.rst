@@ -24,6 +24,8 @@ optimize the performance of our code.
 This package is tested with Python 2.7, 3.5, 3.6 and 3.7, but may also work in other
 Python versions.
 
+.. contents::
+
 Installation
 ------------
 .. code:: bash
