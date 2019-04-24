@@ -36,13 +36,13 @@ def basic_example():
     timer.pause()
     timer.split()  # 0:00:00.1
     print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.4
-    print("timer.splitted_elapsed_time:", [str(delta) for delta in timer.splitted_elapsed_time])
+    print("timer.split_elapsed_time:", [str(delta) for delta in timer.split_elapsed_time])
     # [0:00:00.2, 0:00:00.1, 0:00:00.1]
     timer.reset()
 
     timer.log_elapsed_time()  # 0:00:00
     print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00
-    print("timer.splitted_elapsed_time:", timer.splitted_elapsed_time)  # []
+    print("timer.split_elapsed_time:", timer.split_elapsed_time)  # []
     sleep(0.1)
     timer.start()
     sleep(0.1)
@@ -113,7 +113,7 @@ def cumulative_elapsed_time_example():
         sleep(1)
         timer.log_elapsed_time(prefix="timer.log_elapsed_time(): ")  # 0:00:01....
         print("timer.get_elapsed_time():", timer.get_elapsed_time())  # 0:00:01....
-    print("timer.splitted_elapsed_time:", timer.splitted_elapsed_time)
+    print("timer.split_elapsed_time:", timer.split_elapsed_time)
     # [datetime.timedelta(seconds=1), datetime.timedelta(seconds=1)]
     print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())
     # 0:00:02....
