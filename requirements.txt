@@ -1,7 +1,0 @@
-six
-
-# for test
-nose
-coverage
-tox
-flake8
