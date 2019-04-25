@@ -52,3 +52,17 @@ class MultiStopwatch(UserList):
         return [(sum(stopwatch.split_elapsed_time, datetime.timedelta())
                  / len(stopwatch.split_elapsed_time))
                 for stopwatch in self]
+
+    def get_statistics(self):
+        """Get all statistics as a dictionary.
+
+        Returns
+        -------
+        statistics : Dict[str, List]
+        """
+        return {
+            'cumulative_elapsed_time': self.get_cumulative_elapsed_time(),
+            'percentage': self.get_percentage(),
+            'n_splits': self.get_n_splits(),
+            'mean_per_split': self.get_mean_per_split(),
+        }

@@ -1,4 +1,5 @@
 from time import sleep
+import pprint
 
 from bistiming import MultiStopwatch
 
@@ -15,6 +16,8 @@ def basic_example():
     print("get_n_splits():", timers.get_n_splits())
     print("get_mean_per_split():", timers.get_mean_per_split())
     print("get_percentage():", timers.get_percentage())
+    print("get_statistics():")
+    pprint.pprint(timers.get_statistics())
 
 
 def main():
