@@ -11,3 +11,7 @@ def assert_timedelta_close_seconds(d, s, epsilon=0.05):
     d_s = d.days * 86400 + d.seconds + d.microseconds * 0.000001
     percentage_error = abs(d_s - s) / s
     assert percentage_error < epsilon
+
+
+def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
+    return abs(a - b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)

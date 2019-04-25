@@ -1,10 +1,11 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
-from collections import UserList
+from six.moves import UserList
 import datetime
 
 from six.moves import range
 
 from . import Stopwatch
+from .utils import div_timedelta
 
 
 class MultiStopwatch(UserList):
@@ -34,7 +35,7 @@ class MultiStopwatch(UserList):
         """
         cumulative_elapsed_time = self.get_cumulative_elapsed_time()
         sum_elapsed_time = sum(cumulative_elapsed_time, datetime.timedelta())
-        return [t / sum_elapsed_time for t in cumulative_elapsed_time]
+        return [div_timedelta(t, sum_elapsed_time) for t in cumulative_elapsed_time]
 
     def get_n_splits(self):
         """Get number of splits of each stopwatch (excluding the current split).
@@ -52,8 +53,8 @@ class MultiStopwatch(UserList):
         -------
         mean_elapsed_time_per_split : List[datetime.timedelta]
         """
-        return [(sum(stopwatch.split_elapsed_time, datetime.timedelta())
-                 / len(stopwatch.split_elapsed_time))
+        return [div_timedelta(sum(stopwatch.split_elapsed_time, datetime.timedelta()),
+                              len(stopwatch.split_elapsed_time))
                 for stopwatch in self]
 
     def get_statistics(self):
