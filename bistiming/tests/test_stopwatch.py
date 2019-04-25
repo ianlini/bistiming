@@ -1,18 +1,15 @@
+from __future__ import print_function, division, absolute_import, unicode_literals
 import datetime
 from time import sleep
 
 from examples import stopwatch_examples
 from bistiming import Stopwatch
 
+from .utils import assert_timedelta_close_seconds
+
 
 def test_stopwatch_examples():
     stopwatch_examples.main()
-
-
-def assert_timedelta_close_seconds(d, s, epsilon=0.05):
-    d_s = d.days * 86400 + d.seconds + d.microseconds * 0.000001
-    percentage_error = abs(d_s - s) / s
-    assert percentage_error < epsilon
 
 
 def test_low_level_api():

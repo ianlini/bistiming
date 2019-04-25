@@ -1,6 +1,8 @@
+from __future__ import print_function, division, absolute_import, unicode_literals
 from time import sleep
 import pprint
 
+from six.moves import range
 from bistiming import MultiStopwatch
 
 
