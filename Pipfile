@@ -16,6 +16,7 @@ autopep8 = "*"
 sphinx = "*"
 twine = "*"
 doc8 = "*"
+docutils = "*"
 
 [packages]
 six = "*"
