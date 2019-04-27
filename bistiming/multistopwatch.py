@@ -1,21 +1,33 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
-from six.moves import UserList
 import datetime
 
-from six.moves import range
+from six.moves import UserList, range
 
 from . import Stopwatch
 from .utils import div_timedelta
 
 
 class MultiStopwatch(UserList):
-    def __init__(self, iterable, *args, **kwargs):
-        if isinstance(iterable, int):
-            n = iterable
+    """Use multiple Stopwatch to profile and compare multiple code segments.
+
+    Because this class is inheritted from
+    `UserList <https://docs.python.org/library/collections.html#collections.UserList>`_,
+    it also supports all the methods in the built-in
+    `list <https://docs.python.org/library/stdtypes.html#typesseq>`_.
+    All arguments except ``n`` will be passed to the constructor of ``Stopwatch``.
+
+    Parameters
+    ----------
+    n : Union[int, Iterable]
+        If ``n`` is an ``int``, then initialize a ``list`` with ``n`` ``Stopwatch``.
+        Otherwise, directly use ``n`` to initialize a ``list``.
+    """
+    def __init__(self, n, *args, **kwargs):
+        if isinstance(n, int):
             super(MultiStopwatch, self).__init__(Stopwatch(*args, **kwargs) for i in range(n))
         else:
             assert not args and not kwargs
-            super(MultiStopwatch, self).__init__(iterable)
+            super(MultiStopwatch, self).__init__(n)
 
     def get_cumulative_elapsed_time(self):
         """Get the cumulative elapsed time of each stopwatch (including the current split).

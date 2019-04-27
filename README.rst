@@ -45,7 +45,7 @@ for all the useful examples.
 Context Manager
 +++++++++++++++
 
-The simplest way to use BisTiming is simply using the context manager to include the code
+The simplest way to use BisTiming is using the context manager to include the code
 we want to evaluate:
 
 >>> from bistiming import Stopwatch
@@ -144,6 +144,10 @@ is actually equivalent to the low-level API:
 >>> timer.pause()
 >>> timer.split()
 ...Waiting done in 0:00:00.100330
+
+Advance Profiling
++++++++++++++++++
+
 
 Documentation
 -------------

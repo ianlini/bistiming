@@ -7,7 +7,7 @@ We use ``sleep()`` to simulate the running time of the program we want to evalua
 Context Manager
 +++++++++++++++
 
-The simplest way to use BisTiming is simply using a ``with Stopwatch():`` to include the code
+The simplest way to use BisTiming is using a ``with Stopwatch():`` to include the code
 we want to evaluate:
 
 >>> from bistiming import Stopwatch
