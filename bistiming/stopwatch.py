@@ -13,30 +13,35 @@ class Stopwatch(object):
     ----------
     description : str
         The log to show at starting time (entering with-block or calling :meth:`start`)
-        or ending time (exiting with-block or calling :meth:`split()`).
-    logger : Callable
-        A ``Callable`` that accepts `logging_level` as its first argument and a ``str`` to
-        log as its first argument (basically, a ``logging.Logger`` object). If ``None``, use
-        ``six.print_``, which is similar to the built-in ``print`` in Python 3. When using with
-        ``end_in_new_line=True``, it requires ``end`` and ``flush`` parameters.
+        or ending time (exiting with-block or calling :meth:`split`).
+    logger : :data:`typing.Callable`
+        A callable that accepts `logging_level` as its first argument and a :class:`str` to
+        log as its first argument (basically, a :class:`logging.Logger` object). If `None`,
+        use :func:`six.print_`, which is similar to the built-in :func:`print` in Python 3.
+        When using with ``end_in_new_line=True``, it requires `end` and `flush` parameters.
     logging_level : int
-        If ``logger`` is not ``None``, this is the first argument to be passed to ``logger``.
-        Usually, this should be ``logging.{DEBUG, INFO, WARNING, ERROR, CRITICAL}``.
-        (default: ``logging.INFO``)
+        If `logger` is not `None`, this is the first argument to be passed to `logger`.
+        Usually, this should be `logging.{DEBUG, INFO, WARNING, ERROR, CRITICAL}`.
+        (default: `logging.INFO`)
     verbose_start : bool
-        Wether to log at starting time (entering with-block or calling ``start()``).
+        Wether to log at starting time (entering with-block or calling :meth:`start`).
     verbose_end : bool
-        Wether to log at ending time (exiting with-block or calling :meth:`split()`).
+        Wether to log at ending time (exiting with-block or calling :meth:`split`).
     end_in_new_line : bool
-        Wether to log the ending log in a new line. If ``False``, the starting log will
+        Wether to log the ending log in a new line. If `False`, the starting log will
         not have a trailing new line, so the ending log can be logged in the same line.
-        This requires ``logger`` to have ``end`` and ``flush`` parameters, or just
+        This requires `logger` to have `end` and `flush` parameters, or just
         ``logger=None``.
     prefix : str
-        The prefix added to ``description``.
+        The prefix added to `description`.
     verbose : bool
-        If ``False``, turn off all the logs, that is, ``verbose_start`` and ``verbose_end``
-        will be set to ``False``.
+        If `False`, turn off all the logs, that is, `verbose_start` and `verbose_end`
+        will be set to `False`.
+
+    Attributes
+    ----------
+    split_elapsed_time : List[datetime.timedelta]
+        The elapsed time of each split (excluding the current split).
     """
 
     def __init__(self, description="", logger=None, logging_level=logging.INFO,
@@ -64,10 +69,10 @@ class Stopwatch(object):
         Parameters
         ----------
         verbose : Optional[bool]
-            Wether to log. If ``None``, use ``verbose_start`` set during ``__init__``.
+            Wether to log. If `None`, use `verbose_start` set during initialization.
         end_in_new_line : Optional[bool]]
-            If ``False``, prevent logging the trailing new line. If ``None``, use
-            ``end_in_new_line`` set during ``__init__``.
+            If `False`, prevent logging the trailing new line. If `None`, use
+            `end_in_new_line` set during initialization.
         """
         if self._start_time is not None and self._end_time is None:
             # the stopwatch is already running
@@ -122,16 +127,17 @@ class Stopwatch(object):
     def split(self, verbose=None, end_in_new_line=None):
         """Save the elapsed time of the current split and restart the stopwatch.
 
-        The current elapsed time will be appended to the ``self.split_elapsed_time`` list. If
-        the stopwatch is paused, then it will remain paused. Otherwise, it will continue running.
+        The current elapsed time will be appended to :attr:`split_elapsed_time`.
+        If the stopwatch is paused, then it will remain paused.
+        Otherwise, it will continue running.
 
         Parameters
         ----------
         verbose : Optional[bool]
-            Wether to log. If ``None``, use ``verbose_end`` set during ``__init__``.
+            Wether to log. If `None`, use `verbose_end` set during initialization.
         end_in_new_line : Optional[bool]]
-            Wether to log the description. If ``None``, use ``end_in_new_line`` set during
-            ``__init__``.
+            Wether to log the `description`. If `None`, use `end_in_new_line` set during
+            initialization.
         """
         elapsed_time = self.get_elapsed_time()
         self.split_elapsed_time.append(elapsed_time)
@@ -158,12 +164,12 @@ class Stopwatch(object):
         self.split_elapsed_time = []
 
     def __enter__(self):
-        """Call ``start()``.
+        """Call :meth:`start`.
         """
         return self.start()
 
     def __exit__(self, exc_type, exc, exc_tb):
-        """Call ``pause()`` and then :meth:`split()`.
+        """Call :meth:`pause` and then :meth:`split`.
         """
         self.pause()
         self.split()

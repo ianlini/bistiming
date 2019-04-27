@@ -22,7 +22,7 @@ copyright = '2019, ianlini'
 author = 'ianlini'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3.0'
+release = '0.4.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
     'sphinx.ext.napoleon',
+    'sphinx.ext.intersphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -79,6 +80,11 @@ napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
 napoleon_use_param = True
 napoleon_use_rtype = True
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'six': (('https://six.readthedocs.io/', None)),
+}
 
 # -- Options for todo extension ----------------------------------------------
 
