@@ -12,10 +12,10 @@ class Stopwatch(object):
     Parameters
     ----------
     description : str
-        The log to show at starting time (entering with-block or calling ``start()``)
-        or ending time (exiting with-block or calling ``split()``).
+        The log to show at starting time (entering with-block or calling :meth:`start`)
+        or ending time (exiting with-block or calling :meth:`split()`).
     logger : Callable
-        A ``Callable`` that accepts ``logging_level`` as its first argument and a ``str`` to
+        A ``Callable`` that accepts `logging_level` as its first argument and a ``str`` to
         log as its first argument (basically, a ``logging.Logger`` object). If ``None``, use
         ``six.print_``, which is similar to the built-in ``print`` in Python 3. When using with
         ``end_in_new_line=True``, it requires ``end`` and ``flush`` parameters.
@@ -26,7 +26,7 @@ class Stopwatch(object):
     verbose_start : bool
         Wether to log at starting time (entering with-block or calling ``start()``).
     verbose_end : bool
-        Wether to log at ending time (exiting with-block or calling ``split()``).
+        Wether to log at ending time (exiting with-block or calling :meth:`split()`).
     end_in_new_line : bool
         Wether to log the ending log in a new line. If ``False``, the starting log will
         not have a trailing new line, so the ending log can be logged in the same line.
@@ -163,7 +163,7 @@ class Stopwatch(object):
         return self.start()
 
     def __exit__(self, exc_type, exc, exc_tb):
-        """Call ``pause()`` and then ``split()``.
+        """Call ``pause()`` and then :meth:`split()`.
         """
         self.pause()
         self.split()
