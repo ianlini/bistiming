@@ -33,7 +33,7 @@ with open('README.rst') as fp:
 
 setup(
     name='bistiming',
-    version="0.3.0",
+    version="0.4.0",
     description=description,
     long_description=long_description,
     author='ianlini',
