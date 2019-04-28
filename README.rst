@@ -45,8 +45,8 @@ for all the useful examples.
 Context Manager
 +++++++++++++++
 
-The simplest way to use BisTiming is using the context manager to include the code
-we want to evaluate:
+The simplest way to use BisTiming is using the context manager ``Stopwatch``
+to include the code we want to evaluate:
 
 >>> from bistiming import Stopwatch
 >>> from time import sleep
@@ -109,9 +109,9 @@ finished something 2
 >>> timer.get_cumulative_elapsed_time()
 datetime.timedelta(microseconds=200908)
 
-Each item in :attr:`~bistiming.Stopwatch.split_elapsed_time` is the running time of
+Each item in ``split_elapsed_time`` is the running time of
 the code segment in each iteration, and we can use
-:meth:`~bistiming.Stopwatch.get_cumulative_elapsed_time`
+``get_cumulative_elapsed_time()``
 to get the total running time of the code segment.
 
 Low-level API
@@ -148,7 +148,37 @@ is actually equivalent to the low-level API:
 
 Advance Profiling
 +++++++++++++++++
+``MultiStopwatch`` in this module contains multiple
+``Stopwatch``, so we can use them to define each code segment
+we want to evaluate and compare easily.
 
+>>> from time import sleep
+>>> from bistiming import MultiStopwatch
+>>> timers = MultiStopwatch(2, verbose=False)
+>>> for i in range(5):
+...    for i in range(2):
+...       with timers[0]:
+...             sleep(0.1)
+...    with timers[1]:
+...       sleep(0.1)
+...
+>>> timers.get_statistics()
+{'cumulative_elapsed_time': [datetime.timedelta(seconds=1, microseconds=2879),
+                             datetime.timedelta(microseconds=501441)],
+ 'percentage': [0.6666660019144863, 0.3333339980855137],
+ 'n_splits': [10, 5],
+ 'mean_per_split': [datetime.timedelta(microseconds=100288),
+                    datetime.timedelta(microseconds=100288)]}
+
+We can also use `pandas.DataFrame` to make the statistics more readable
+(note that you may need to
+`install pandas <https://pandas.pydata.org/pandas-docs/stable/install.html>`_ first):
+
+>>> import pandas as pd
+>>> pd.DataFrame(timers.get_statistics())
+  cumulative_elapsed_time  percentage  n_splits  mean_per_split
+0         00:00:01.002879    0.666666        10 00:00:00.100288
+1         00:00:00.501441    0.333334         5 00:00:00.100288
 
 Documentation
 -------------

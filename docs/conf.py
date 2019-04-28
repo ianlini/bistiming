@@ -97,8 +97,9 @@ napoleon_use_param = True
 napoleon_use_rtype = True
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3', None),
+    'python': ('https://docs.python.org/3/', None),
     'six': ('https://six.readthedocs.io/', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
 }
 
 # -- Options for todo extension ----------------------------------------------

@@ -7,8 +7,8 @@ We use :func:`~time.sleep` to simulate the running time of the program we want t
 Context Manager
 +++++++++++++++
 
-The simplest way to use BisTiming is using a ``with Stopwatch():`` to include the code
-we want to evaluate:
+The simplest way to use BisTiming is using the context manager :class:`~bistiming.Stopwatch`
+to include the code we want to evaluate:
 
 >>> from bistiming import Stopwatch
 >>> from time import sleep
@@ -26,7 +26,7 @@ The stopwatch output ``...`` when entering the ``with``-block, and output
 ``... done in...`` when exiting.
 
 If we want to add more description to describe what we are doing, we can use the first
-parameter in :class:`~bistiming.Stopwatch`:
+parameter in :meth:`~bistiming.Stopwatch`:
 
 >>> with Stopwatch("Waiting"):
 ...     print("do something")
@@ -313,3 +313,46 @@ Elapsed time: 0:00:00.10137
 
 :meth:`~bistiming.Stopwatch.reset` will clear all the states in the stopwatch
 just like a whole new stopwatch.
+
+Advance Profiling
++++++++++++++++++
+There is another useful tool `line_profiler <https://github.com/rkern/line_profiler>`_
+for line-by-line performance profiling.
+It's very convenient because we only need to add one line to our code to enable the profiling,
+and the result is an easy-to-understand statistics.
+However, it has a large overhead when some lines are very simple and can be finished in
+few nanoseconds.
+The running time of those lines will be overestimated especially when they are hit much
+more times than other lines.
+
+:class:`~bistiming.MultiStopwatch` in this module contains multiple
+:class:`~bistiming.Stopwatch`, so we can use them to define each code segment
+we want to evaluate and compare easily.
+
+>>> from time import sleep
+>>> from bistiming import MultiStopwatch
+>>> timers = MultiStopwatch(2, verbose=False)
+>>> for i in range(5):
+...    for i in range(2):
+...       with timers[0]:
+...             sleep(0.1)
+...    with timers[1]:
+...       sleep(0.1)
+...
+>>> timers.get_statistics()
+{'cumulative_elapsed_time': [datetime.timedelta(seconds=1, microseconds=2879),
+                             datetime.timedelta(microseconds=501441)],
+ 'percentage': [0.6666660019144863, 0.3333339980855137],
+ 'n_splits': [10, 5],
+ 'mean_per_split': [datetime.timedelta(microseconds=100288),
+                    datetime.timedelta(microseconds=100288)]}
+
+We can also use :class:`pandas.DataFrame` to make the statistics more readable
+(note that you may need to
+`install pandas <https://pandas.pydata.org/pandas-docs/stable/install.html>`_ first):
+
+>>> import pandas as pd
+>>> pd.DataFrame(timers.get_statistics())
+  cumulative_elapsed_time  percentage  n_splits  mean_per_split
+0         00:00:01.002879    0.666666        10 00:00:00.100288
+1         00:00:00.501441    0.333334         5 00:00:00.100288
