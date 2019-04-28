@@ -14,6 +14,8 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('../'))
 
+import bistiming
+
 
 # -- Project information -----------------------------------------------------
 
@@ -22,7 +24,7 @@ copyright = '2019, ianlini'
 author = 'ianlini'
 
 # The full version, including alpha/beta/rc tags
-release = '0.4.0'
+release = bistiming.__version__
 
 
 # -- General configuration ---------------------------------------------------
