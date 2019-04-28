@@ -60,7 +60,7 @@ do something
 finished something
 ...Waiting done in 0:00:00.100330
 
-We can use the parameter ``logger`` and ``logging_level`` to tell the stopwatch to output
+We can use the parameter `logger` and `logging_level` to tell the stopwatch to output
 using a logger:
 
 >>> import logging
@@ -109,9 +109,10 @@ finished something 2
 >>> timer.get_cumulative_elapsed_time()
 datetime.timedelta(microseconds=200908)
 
-Each item in ``split_elapsed_time`` is the running time of the code segment in each
-iteration, and we can use ``get_cumulative_elapsed_time()`` to get the total running
-time of the code segment.
+Each item in :attr:`~bistiming.Stopwatch.split_elapsed_time` is the running time of
+the code segment in each iteration, and we can use
+:meth:`~bistiming.Stopwatch.get_cumulative_elapsed_time`
+to get the total running time of the code segment.
 
 Low-level API
 +++++++++++++

@@ -10,7 +10,7 @@ from .utils import div_timedelta
 class MultiStopwatch(UserList):
     """Use multiple :class:`Stopwatch` to profile and compare multiple code segments.
 
-    Because this class is inheritted from :class:`collections.UserList`,
+    Because this class is inheritted from :class:`~collections.UserList`,
     it also supports all the methods in the built-in :class:`list`.
 
     Parameters

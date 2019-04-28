@@ -14,7 +14,7 @@ class Stopwatch(object):
     description : str
         The log to show at starting time (entering with-block or calling :meth:`start`)
         or ending time (exiting with-block or calling :meth:`split`).
-    logger : :data:`typing.Callable`
+    logger : :data:`~typing.Callable`
         A callable that accepts `logging_level` as its first argument and a :class:`str` to
         log as its first argument (basically, a :class:`logging.Logger` object). If `None`,
         use :func:`six.print_`, which is similar to the built-in :func:`print` in Python 3.
