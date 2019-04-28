@@ -148,9 +148,9 @@ is actually equivalent to the low-level API:
 
 Advance Profiling
 +++++++++++++++++
-``MultiStopwatch`` in this module contains multiple
+``MultiStopwatch`` in this package contains multiple
 ``Stopwatch``, so we can use them to define each code segment
-we want to evaluate and compare easily.
+we want to evaluate and compare easily:
 
 >>> from time import sleep
 >>> from bistiming import MultiStopwatch
@@ -170,7 +170,7 @@ we want to evaluate and compare easily.
  'mean_per_split': [datetime.timedelta(microseconds=100288),
                     datetime.timedelta(microseconds=100288)]}
 
-We can also use `pandas.DataFrame` to make the statistics more readable
+We can also use ``pandas.DataFrame`` to make the statistics more readable
 (note that you may need to
 `install pandas <https://pandas.pydata.org/pandas-docs/stable/install.html>`_ first):
 

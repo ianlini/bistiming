@@ -325,20 +325,28 @@ few nanoseconds.
 The running time of those lines will be overestimated especially when they are hit much
 more times than other lines.
 
-:class:`~bistiming.MultiStopwatch` in this module contains multiple
+:class:`~bistiming.MultiStopwatch` in this package contains multiple
 :class:`~bistiming.Stopwatch`, so we can use them to define each code segment
-we want to evaluate and compare easily.
+we want to evaluate and compare easily:
 
 >>> from time import sleep
 >>> from bistiming import MultiStopwatch
 >>> timers = MultiStopwatch(2, verbose=False)
 >>> for i in range(5):
-...    for i in range(2):
-...       with timers[0]:
+...     for i in range(2):
+...         with timers[0]:
 ...             sleep(0.1)
-...    with timers[1]:
-...       sleep(0.1)
+...     with timers[1]:
+...         sleep(0.1)
 ...
+>>> timers.get_cumulative_elapsed_time()
+[datetime.timedelta(seconds=1, microseconds=2879), datetime.timedelta(microseconds=501441)]
+>>> timers.get_n_splits()
+[10, 5]
+>>> timers.get_mean_per_split()
+[datetime.timedelta(microseconds=100288), datetime.timedelta(microseconds=100288)]
+>>> timers.get_percentage()
+[0.6666660019144863, 0.3333339980855137]
 >>> timers.get_statistics()
 {'cumulative_elapsed_time': [datetime.timedelta(seconds=1, microseconds=2879),
                              datetime.timedelta(microseconds=501441)],
@@ -356,3 +364,51 @@ We can also use :class:`pandas.DataFrame` to make the statistics more readable
   cumulative_elapsed_time  percentage  n_splits  mean_per_split
 0         00:00:01.002879    0.666666        10 00:00:00.100288
 1         00:00:00.501441    0.333334         5 00:00:00.100288
+
+If we actually don't care about the inner loop, we can move the ``timer[0]`` outside
+to reduce the overhead:
+
+>>> timers = MultiStopwatch(2, verbose=False)
+>>> for i in range(5):
+...     with timers[0]:
+...         for i in range(2):
+...             sleep(0.1)
+...     with timers[1]:
+...         sleep(0.1)
+...
+>>> pd.DataFrame(timers.get_statistics())
+  cumulative_elapsed_time  percentage  n_splits  mean_per_split
+0         00:00:01.002816    0.666471         5 00:00:00.200563
+1         00:00:00.501850    0.333529         5 00:00:00.100370
+
+Like we said previously, if the inner loop is very fast, and we run it much more times
+than other lines, its running time will be overestimated:
+
+>>> timers1 = MultiStopwatch(2, verbose=False)
+>>> for i in range(5):
+...     for i in range(100000):
+...         with timers1[0]:
+...             a = 0
+...     with timers1[1]:
+...         sleep(0.1)
+...
+>>> timers2 = MultiStopwatch(2, verbose=False)
+>>> for i in range(5):
+...     with timers2[0]:
+...         for i in range(100000):
+...             a = 0
+...     with timers2[1]:
+...         sleep(0.1)
+...
+>>> pd.DataFrame(timers1.get_statistics())
+  cumulative_elapsed_time  percentage  n_splits  mean_per_split
+0         00:00:00.479970    0.489214    500000 00:00:00.000001
+1         00:00:00.501135    0.510786         5 00:00:00.100227
+>>> pd.DataFrame(timers2.get_statistics())
+  cumulative_elapsed_time  percentage  n_splits  mean_per_split
+0         00:00:00.098682    0.164432         5 00:00:00.019736
+1         00:00:00.501455    0.835568         5 00:00:00.100291
+
+We can notice a big difference between ``timers1`` and ``timers2``.
+``timers2`` is more reasonable if we are finding the bottleneck of the code
+because ``sleep(0.1)`` actually takes much more time than 100000 times of ``a = 0``.
