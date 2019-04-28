@@ -1,6 +1,7 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
 from time import sleep
 import unittest
+import datetime
 
 from six.moves import range, zip
 from examples import multistopwatch_examples
@@ -13,7 +14,7 @@ class TestMultiStopwatch(unittest.TestCase):
     def test_multistopwatch_examples(self):
         multistopwatch_examples.main()
 
-    def test_muulti_stopwatch(self):
+    def test_multi_stopwatch(self):
         timers = MultiStopwatch(2, verbose=False)
         for i in range(5):
             for i in range(2):
@@ -43,3 +44,17 @@ class TestMultiStopwatch(unittest.TestCase):
         self.assertListEqual(
             sorted(timers.get_statistics().keys()),
             ['cumulative_elapsed_time', 'mean_per_split', 'n_splits', 'percentage'])
+
+    def test_empty_multi_stopwatch(self):
+        timers = MultiStopwatch(2, verbose=False)
+        self.assertListEqual(
+            timers.get_cumulative_elapsed_time(),
+            [datetime.timedelta()] * 2)
+        with self.assertRaises(ValueError):
+            timers.get_percentage()
+        self.assertListEqual(timers.get_n_splits(), [0, 0])
+        self.assertListEqual(
+            timers.get_mean_per_split(),
+            [datetime.timedelta()] * 2)
+        with self.assertRaises(ValueError):
+            timers.get_statistics()

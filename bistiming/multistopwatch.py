@@ -48,6 +48,8 @@ class MultiStopwatch(UserList):
         """
         cumulative_elapsed_time = self.get_cumulative_elapsed_time()
         sum_elapsed_time = sum(cumulative_elapsed_time, datetime.timedelta())
+        if not sum_elapsed_time:
+            raise ValueError("cannot get percentage if there is no any elapsed time")
         return [div_timedelta(t, sum_elapsed_time) for t in cumulative_elapsed_time]
 
     def get_n_splits(self):
@@ -68,6 +70,7 @@ class MultiStopwatch(UserList):
         """
         return [div_timedelta(sum(stopwatch.split_elapsed_time, datetime.timedelta()),
                               len(stopwatch.split_elapsed_time))
+                if stopwatch.split_elapsed_time else datetime.timedelta()
                 for stopwatch in self]
 
     def get_statistics(self):
