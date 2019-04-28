@@ -15,19 +15,19 @@ class MultiStopwatch(UserList):
 
     Parameters
     ----------
-    n : Union[int, Iterable]
+    n : Union[int, Iterable, None]
         If `n` is an `int`, then initialize a `list` with `n` :class:`Stopwatch`.
+        If `n` is `None`, then initialize an empty `list`.
         Otherwise, directly use `n` to initialize a `list`.
     *args
         Other arguments will be passed to initialize :class:`Stopwatch`.
     **kwargs
         Other keyword arguments will be passed to initialize :class:`Stopwatch`.
     """
-    def __init__(self, n, *args, **kwargs):
+    def __init__(self, n=None, *args, **kwargs):
         if isinstance(n, int):
             super(MultiStopwatch, self).__init__(Stopwatch(*args, **kwargs) for i in range(n))
         else:
-            assert not args and not kwargs
             super(MultiStopwatch, self).__init__(n)
 
     def get_cumulative_elapsed_time(self):

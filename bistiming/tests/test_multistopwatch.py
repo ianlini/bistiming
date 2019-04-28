@@ -45,7 +45,7 @@ class TestMultiStopwatch(unittest.TestCase):
             sorted(timers.get_statistics().keys()),
             ['cumulative_elapsed_time', 'mean_per_split', 'n_splits', 'percentage'])
 
-    def test_empty_multi_stopwatch(self):
+    def test_multi_stopwatch_without_elapsed_time(self):
         timers = MultiStopwatch(2, verbose=False)
         self.assertListEqual(
             timers.get_cumulative_elapsed_time(),
@@ -56,5 +56,15 @@ class TestMultiStopwatch(unittest.TestCase):
         self.assertListEqual(
             timers.get_mean_per_split(),
             [datetime.timedelta()] * 2)
+        with self.assertRaises(ValueError):
+            timers.get_statistics()
+
+    def test_empty_multi_stopwatch(self):
+        timers = MultiStopwatch()
+        self.assertListEqual(timers.get_cumulative_elapsed_time(), [])
+        with self.assertRaises(ValueError):
+            timers.get_percentage()
+        self.assertListEqual(timers.get_n_splits(), [])
+        self.assertListEqual(timers.get_mean_per_split(), [])
         with self.assertRaises(ValueError):
             timers.get_statistics()
