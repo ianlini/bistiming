@@ -8,19 +8,20 @@ from .utils import div_timedelta
 
 
 class MultiStopwatch(UserList):
-    """Use multiple Stopwatch to profile and compare multiple code segments.
+    """Use multiple :class:`Stopwatch` to profile and compare multiple code segments.
 
-    Because this class is inheritted from
-    `UserList <https://docs.python.org/library/collections.html#collections.UserList>`_,
-    it also supports all the methods in the built-in
-    `list <https://docs.python.org/library/stdtypes.html#typesseq>`_.
-    All arguments except ``n`` will be passed to the constructor of ``Stopwatch``.
+    Because this class is inheritted from :class:`collections.UserList`,
+    it also supports all the methods in the built-in :class:`list`.
 
     Parameters
     ----------
     n : Union[int, Iterable]
-        If ``n`` is an ``int``, then initialize a ``list`` with ``n`` ``Stopwatch``.
-        Otherwise, directly use ``n`` to initialize a ``list``.
+        If `n` is an `int`, then initialize a `list` with `n` :class:`Stopwatch`.
+        Otherwise, directly use `n` to initialize a `list`.
+    *args
+        Other arguments will be passed to initialize :class:`Stopwatch`.
+    **kwargs
+        Other keyword arguments will be passed to initialize :class:`Stopwatch`.
     """
     def __init__(self, n, *args, **kwargs):
         if isinstance(n, int):
