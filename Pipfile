@@ -16,6 +16,8 @@ autopep8 = "*"
 sphinx = "*"
 twine = "*"
 doc8 = "*"
+docutils = "*"
+sphinx-rtd-theme = "==0.4.3"
 
 [packages]
 six = "*"

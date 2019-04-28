@@ -7,7 +7,9 @@ on_rtd = os.environ.get('READTHEDOCS') == 'True'
 # read the docs could not compile numpy and c extensions
 if on_rtd:
     setup_requires = []
-    install_requires = []
+    install_requires = [
+        'sphinx_rtd_theme==0.4.3',
+    ]
 else:
     setup_requires = [
         'nose',
@@ -31,7 +33,7 @@ with open('README.rst') as fp:
 
 setup(
     name='bistiming',
-    version="0.3.0",
+    version="0.4.0",
     description=description,
     long_description=long_description,
     author='ianlini',
