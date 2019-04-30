@@ -17,11 +17,11 @@ When we search the stopwatch or timing module for Python on the internet, we can
 lot of code snippets, but none of them is powerful or convenient enough to do our daily
 jobs.
 BisTiming aims at implementing all the missing functions in those code snippets and
-preventing us from reinventing the wheel.
-It is very useful when we want to log something with some timing information or even
+prevents us from reinventing the wheel.
+It is very useful when we want to log something with some timing information or 
 optimize the performance of our code.
 
-This package is tested with Python 2.7, 3.5, 3.6 and 3.7, but may also work in other
+This package is tested with Python 2.7, 3.5, 3.6 and 3.7, but might also work in other
 Python versions.
 
 .. contents::
@@ -35,8 +35,8 @@ Installation
 Getting Started
 ---------------
 
-BisTiming has a context manager interface that let us log the running time of a code block
-easily, and it also has low-level API that let us time multiple segments or loops of
+BisTiming has a context manager interface that logs the running time of a code block
+easily, and it also offers a low-level API to help time multiple segments or loops of
 code easily.
 
 See `examples <https://github.com/ianlini/bistiming/blob/master/examples/>`_
@@ -45,8 +45,8 @@ for all the useful examples.
 Context Manager
 +++++++++++++++
 
-The simplest way to use BisTiming is using the context manager ``Stopwatch``
-to include the code we want to evaluate:
+The simplest way to use BisTiming is by using the context manager ``Stopwatch``
+and include the code we want to evaluate:
 
 >>> from bistiming import Stopwatch
 >>> from time import sleep
