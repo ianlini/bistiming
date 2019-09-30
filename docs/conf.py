@@ -20,8 +20,8 @@ import bistiming
 # -- Project information -----------------------------------------------------
 
 project = 'BisTiming'
-copyright = '2019, ianlini'
-author = 'ianlini'
+copyright = '2019, Ian Lin'
+author = 'Ian Lin'
 
 # The full version, including alpha/beta/rc tags
 release = bistiming.__version__

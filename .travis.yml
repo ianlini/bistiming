@@ -11,13 +11,12 @@ matrix:
     - python: '3.5'
     - python: '3.6'
     - python: '3.7'
-      dist: xenial
-      sudo: true
-    - python: '3.6'
+    - python: '3.8-dev'
+    - python: '3.7'
       env: TOXENV=flake8
 
 install:
-  - pip install -U pip wheel setuptools
+  - pip install -U pip wheel
   - pip install -U Cython
   - pip install -U tox-travis tox
 
