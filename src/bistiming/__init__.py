@@ -1,6 +1,7 @@
-__all__ = ['Stopwatch', 'MultiStopwatch']
+__all__ = ["Stopwatch", "MultiStopwatch"]
 
 import pkg_resources
+
 __version__ = pkg_resources.get_distribution("bistiming").version
 
 from .stopwatch import Stopwatch  # noqa: F401

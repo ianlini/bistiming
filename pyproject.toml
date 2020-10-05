@@ -32,6 +32,24 @@ black = { version = "=20.8b1", python = "^3.8" }
 sphinx = { version = "^2.2", python = "^3.8"}
 sphinx-rtd-theme = { version = "^0.4.3", python = "^3.8"}
 
+[tool.black]
+target-version = ['py38']
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.nox
+  | \.tox
+  | \.venv
+  | \.svn
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

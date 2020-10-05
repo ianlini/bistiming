@@ -25,8 +25,8 @@ class TestMultiStopwatch(unittest.TestCase):
 
         # test get_cumulative_elapsed_time()
         assert_timedelta_close_seconds_list(
-            timers.get_cumulative_elapsed_time(),
-            [1, 0.5])
+            timers.get_cumulative_elapsed_time(), [1, 0.5]
+        )
 
         # test get_percentage()
         for p, exp in zip(timers.get_percentage(), [2 / 3, 1 / 3]):
@@ -36,26 +36,23 @@ class TestMultiStopwatch(unittest.TestCase):
         self.assertListEqual(timers.get_n_splits(), [10, 5])
 
         # test get_mean_per_split()
-        assert_timedelta_close_seconds_list(
-            timers.get_mean_per_split(),
-            [0.1, 0.1])
+        assert_timedelta_close_seconds_list(timers.get_mean_per_split(), [0.1, 0.1])
 
         # test get_statistics()
         self.assertListEqual(
             sorted(timers.get_statistics().keys()),
-            ['cumulative_elapsed_time', 'mean_per_split', 'n_splits', 'percentage'])
+            ["cumulative_elapsed_time", "mean_per_split", "n_splits", "percentage"],
+        )
 
     def test_multi_stopwatch_without_elapsed_time(self):
         timers = MultiStopwatch(2, verbose=False)
         self.assertListEqual(
-            timers.get_cumulative_elapsed_time(),
-            [datetime.timedelta()] * 2)
+            timers.get_cumulative_elapsed_time(), [datetime.timedelta()] * 2
+        )
         with self.assertRaises(ValueError):
             timers.get_percentage()
         self.assertListEqual(timers.get_n_splits(), [0, 0])
-        self.assertListEqual(
-            timers.get_mean_per_split(),
-            [datetime.timedelta()] * 2)
+        self.assertListEqual(timers.get_mean_per_split(), [datetime.timedelta()] * 2)
         with self.assertRaises(ValueError):
             timers.get_statistics()
 
