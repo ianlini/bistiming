@@ -1,12 +1,13 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
+
 from time import sleep
 import unittest
 import datetime
 
 from six.moves import range, zip
 from examples import multistopwatch_examples
-from bistiming import MultiStopwatch
 
+from bistiming import MultiStopwatch
 from .utils import assert_timedelta_close_seconds_list, isclose
 
 
@@ -16,8 +17,8 @@ class TestMultiStopwatch(unittest.TestCase):
 
     def test_multi_stopwatch(self):
         timers = MultiStopwatch(2, verbose=False)
-        for i in range(5):
-            for i in range(2):
+        for _ in range(5):
+            for _ in range(2):
                 with timers[0]:
                     sleep(0.1)
             with timers[1]:

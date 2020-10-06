@@ -1,10 +1,11 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
+
 import datetime
 from time import sleep
 
 from examples import stopwatch_examples
-from bistiming import Stopwatch
 
+from bistiming import Stopwatch
 from .utils import assert_timedelta_close_seconds
 
 
