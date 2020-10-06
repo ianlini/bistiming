@@ -19,9 +19,9 @@ import bistiming
 
 # -- Project information -----------------------------------------------------
 
-project = 'BisTiming'
-copyright = '2019, Ian Lin'
-author = 'Ian Lin'
+project = "BisTiming"
+copyright = "2019, Ian Lin"
+author = "Ian Lin"
 
 # The full version, including alpha/beta/rc tags
 release = bistiming.__version__
@@ -33,11 +33,11 @@ release = bistiming.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.todo',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.intersphinx',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.todo",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.intersphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -48,12 +48,12 @@ extensions = [
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -65,9 +65,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_theme = "sphinx_rtd_theme"
 
 html_theme_options = {
-    'canonical_url': 'https://bistiming.readthedocs.io/en/latest/',
+    "canonical_url": "https://bistiming.readthedocs.io/en/latest/",
     # Toc options
-    'collapse_navigation': False,
+    "collapse_navigation": False,
 }
 
 html_context = {
@@ -99,9 +99,9 @@ napoleon_use_param = True
 napoleon_use_rtype = True
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/3/', None),
-    'six': ('https://six.readthedocs.io/', None),
-    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
+    "python": ("https://docs.python.org/3/", None),
+    "six": ("https://six.readthedocs.io/", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
 }
 
 # -- Options for todo extension ----------------------------------------------
@@ -110,4 +110,4 @@ intersphinx_mapping = {
 todo_include_todos = True
 
 
-master_doc = 'index'
+master_doc = "index"

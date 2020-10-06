@@ -1,4 +1,5 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
+
 from time import sleep
 import logging
 
@@ -6,8 +7,8 @@ from bistiming import Stopwatch
 
 
 logging.basicConfig(
-    level=logging.DEBUG,
-    format="[%(asctime)s] %(levelname)s: %(name)s: %(message)s")
+    level=logging.DEBUG, format="[%(asctime)s] %(levelname)s: %(name)s: %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -26,23 +27,33 @@ def basic_example():
     timer.log_elapsed_time()  # 0:00:00.2
     timer.split()  # 0:00:00.2
     timer.log_elapsed_time()  # 0:00:00
-    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.2
+    print(
+        "timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time()
+    )  # 0:00:00.2
     sleep(0.1)
     timer.start()
     sleep(0.1)
     timer.log_elapsed_time()  # 0:00:00.1
-    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.3
+    print(
+        "timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time()
+    )  # 0:00:00.3
     timer.split()  # 0:00:00.1
     sleep(0.1)
     timer.pause()
     timer.split()  # 0:00:00.1
-    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00.4
-    print("timer.split_elapsed_time:", [str(delta) for delta in timer.split_elapsed_time])
+    print(
+        "timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time()
+    )  # 0:00:00.4
+    print(
+        "timer.split_elapsed_time:", [str(delta) for delta in timer.split_elapsed_time]
+    )
     # [0:00:00.2, 0:00:00.1, 0:00:00.1]
     timer.reset()
 
     timer.log_elapsed_time()  # 0:00:00
-    print("timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time())  # 0:00:00
+    print(
+        "timer.get_cumulative_elapsed_time():", timer.get_cumulative_elapsed_time()
+    )  # 0:00:00
     print("timer.split_elapsed_time:", timer.split_elapsed_time)  # []
     sleep(0.1)
     timer.start()
@@ -105,7 +116,9 @@ def logging_level_example():
 
 
 def cumulative_elapsed_time_example():
-    print("[cumulative_elapsed_time_example] use python logging module with different log level")
+    print(
+        "[cumulative_elapsed_time_example] use python logging module with different log level"
+    )
     timer = Stopwatch("Waiting")
     with timer:
         sleep(1)
@@ -144,5 +157,5 @@ def main():
     cumulative_elapsed_time_example()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

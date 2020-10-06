@@ -1,4 +1,5 @@
 from __future__ import print_function, division, absolute_import, unicode_literals
+
 from functools import partial
 import logging
 import datetime
@@ -44,9 +45,17 @@ class Stopwatch(object):
         The elapsed time of each split (excluding the current split).
     """
 
-    def __init__(self, description="", logger=None, logging_level=logging.INFO,
-                 verbose_start=True, verbose_end=True, end_in_new_line=True,
-                 prefix="...", verbose=True):
+    def __init__(
+        self,
+        description="",
+        logger=None,
+        logging_level=logging.INFO,
+        verbose_start=True,
+        verbose_end=True,
+        end_in_new_line=True,
+        prefix="...",
+        verbose=True,
+    ):
         if logger is not None:
             self.log = partial(logger.log, logging_level)
         else:
@@ -102,16 +111,14 @@ class Stopwatch(object):
         self._elapsed_time += self._end_time - self._start_time
 
     def get_elapsed_time(self):
-        """Get the elapsed time of the current split.
-        """
+        """Get the elapsed time of the current split."""
         if self._start_time is None or self._end_time is not None:
             # the stopwatch is paused
             return self._elapsed_time
         return self._elapsed_time + (datetime.datetime.now() - self._start_time)
 
     def get_cumulative_elapsed_time(self):
-        """Get the cumulative elapsed time without considering splits.
-        """
+        """Get the cumulative elapsed time without considering splits."""
         return self._cumulative_elapsed_time + self.get_elapsed_time()
 
     def log_elapsed_time(self, prefix="Elapsed time: "):
@@ -155,8 +162,7 @@ class Stopwatch(object):
         self._start_time = datetime.datetime.now()
 
     def reset(self):
-        """Reset the stopwatch.
-        """
+        """Reset the stopwatch."""
         self._start_time = None
         self._end_time = None
         self._elapsed_time = datetime.timedelta()
@@ -164,12 +170,10 @@ class Stopwatch(object):
         self.split_elapsed_time = []
 
     def __enter__(self):
-        """Call :meth:`start`.
-        """
+        """Call :meth:`start`."""
         return self.start()
 
     def __exit__(self, exc_type, exc, exc_tb):
-        """Call :meth:`pause` and then :meth:`split`.
-        """
+        """Call :meth:`pause` and then :meth:`split`."""
         self.pause()
         self.split()
