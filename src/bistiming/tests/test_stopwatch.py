@@ -4,7 +4,6 @@ import datetime
 from time import sleep
 
 from examples import stopwatch_examples
-
 from bistiming import Stopwatch
 from .utils import assert_timedelta_close_seconds
 

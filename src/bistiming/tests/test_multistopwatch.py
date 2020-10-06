@@ -5,8 +5,8 @@ import unittest
 import datetime
 
 from six.moves import range, zip
-from examples import multistopwatch_examples
 
+from examples import multistopwatch_examples
 from bistiming import MultiStopwatch
 from .utils import assert_timedelta_close_seconds_list, isclose
 
