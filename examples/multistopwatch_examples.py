@@ -22,6 +22,7 @@ def basic_example():
     print("get_percentage():", timers.get_percentage())
     print("get_statistics():")
     pprint.pprint(timers.get_statistics())
+    print(timers.format_statistics())
 
 
 def main():
