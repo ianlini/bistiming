@@ -1,7 +1,7 @@
 BisTiming
 =========
-.. image:: https://img.shields.io/travis/ianlini/bistiming/master.svg
-   :target: https://travis-ci.org/ianlini/bistiming
+.. image:: https://travis-ci.com/ianlini/bistiming.svg?branch=master
+   :target: https://travis-ci.com/ianlini/bistiming
 .. image:: https://readthedocs.org/projects/pip/badge/
    :target: https://bistiming.readthedocs.io/
 .. image:: https://img.shields.io/pypi/v/bistiming.svg
