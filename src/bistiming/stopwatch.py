@@ -131,7 +131,12 @@ class Stopwatch(object):
         """
         self.log("{}{}".format(prefix, self.get_elapsed_time()))
 
-    def split(self, verbose=None, end_in_new_line=None):
+    def split(
+        self,
+        verbose=None,
+        end_in_new_line=None,
+        message_format="done in {elapsed_time}",
+    ):
         """Save the elapsed time of the current split and restart the stopwatch.
 
         The current elapsed time will be appended to :attr:`split_elapsed_time`.
@@ -145,6 +150,10 @@ class Stopwatch(object):
         end_in_new_line : Optional[bool]]
             Wether to log the `description`. If `None`, use `end_in_new_line` set during
             initialization.
+        message_format: str
+            The string that will be formatted using ``message_format.format(...)``
+            and be logged as the ending message.
+            Available variables: `elapsed_time`.
         """
         elapsed_time = self.get_elapsed_time()
         self.split_elapsed_time.append(elapsed_time)
@@ -153,12 +162,13 @@ class Stopwatch(object):
         if verbose is None:
             verbose = self.verbose_end
         if verbose:
+            message = message_format.format(elapsed_time=elapsed_time)
             if end_in_new_line is None:
                 end_in_new_line = self.end_in_new_line
             if end_in_new_line:
-                self.log("{} done in {}".format(self.description, elapsed_time))
+                self.log("{} {}".format(self.description, message))
             else:
-                self.log(" done in {}".format(elapsed_time))
+                self.log(" {}".format(message))
         self._start_time = datetime.datetime.now()
 
     def reset(self):
@@ -176,4 +186,7 @@ class Stopwatch(object):
     def __exit__(self, exc_type, exc, exc_tb):
         """Call :meth:`pause` and then :meth:`split`."""
         self.pause()
-        self.split()
+        if exc_type is None:
+            self.split()
+        else:
+            self.split(message_format="got exception in {elapsed_time}")
