@@ -8,7 +8,7 @@ Context Manager
 +++++++++++++++
 
 The simplest way to use BisTiming is by using the context manager :class:`~bistiming.Stopwatch`
-to include the code we want to evaluate:
+and include the code we want to evaluate:
 
 >>> from bistiming import Stopwatch
 >>> from time import sleep
