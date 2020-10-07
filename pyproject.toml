@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bistiming"
-version = "0.5.0"
+version = "0.6.0dev0"
 description = "A logging-friendly stopwatch and profiling tool for Python."
 authors = ["Ian Lin <you@example.com>"]
 license = "MIT"
