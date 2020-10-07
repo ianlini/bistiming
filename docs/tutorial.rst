@@ -7,8 +7,8 @@ We use :func:`~time.sleep` to simulate the running time of the program we want t
 Context Manager
 +++++++++++++++
 
-The simplest way to use BisTiming is using the context manager :class:`~bistiming.Stopwatch`
-to include the code we want to evaluate:
+The simplest way to use BisTiming is by using the context manager :class:`~bistiming.Stopwatch`
+and include the code we want to evaluate:
 
 >>> from bistiming import Stopwatch
 >>> from time import sleep
