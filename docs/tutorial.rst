@@ -340,30 +340,28 @@ we want to evaluate and compare easily:
 ...         sleep(0.1)
 ...
 >>> timers.get_cumulative_elapsed_time()
-[datetime.timedelta(seconds=1, microseconds=2879), datetime.timedelta(microseconds=501441)]
+[datetime.timedelta(seconds=1, microseconds=2417), datetime.timedelta(microseconds=501861)]
 >>> timers.get_n_splits()
 [10, 5]
 >>> timers.get_mean_per_split()
-[datetime.timedelta(microseconds=100288), datetime.timedelta(microseconds=100288)]
+[datetime.timedelta(microseconds=100242), datetime.timedelta(microseconds=100372)]
 >>> timers.get_percentage()
-[0.6666660019144863, 0.3333339980855137]
+[0.6663774913945427, 0.3336225086054572]
 >>> timers.get_statistics()
-{'cumulative_elapsed_time': [datetime.timedelta(seconds=1, microseconds=2879),
-                             datetime.timedelta(microseconds=501441)],
- 'percentage': [0.6666660019144863, 0.3333339980855137],
+{'cumulative_elapsed_time': [datetime.timedelta(seconds=1, microseconds=2417),
+                             datetime.timedelta(microseconds=501861)],
+ 'mean_per_split': [datetime.timedelta(microseconds=100242),
+                    datetime.timedelta(microseconds=100372)],
  'n_splits': [10, 5],
- 'mean_per_split': [datetime.timedelta(microseconds=100288),
-                    datetime.timedelta(microseconds=100288)]}
-
-We can also use :class:`pandas.DataFrame` to make the statistics more readable
-(note that you may need to
-`install pandas <https://pandas.pydata.org/pandas-docs/stable/install.html>`_ first):
-
->>> import pandas as pd
->>> pd.DataFrame(timers.get_statistics())
-  cumulative_elapsed_time  percentage  n_splits  mean_per_split
-0         00:00:01.002879    0.666666        10 00:00:00.100288
-1         00:00:00.501441    0.333334         5 00:00:00.100288
+ 'percentage': [0.6663774913945427, 0.3336225086054572]}
+>>> print(timers.format_statistics())
+╒═══════════════════════════╤══════════════╤════════════╤══════════════════╕
+│ cumulative_elapsed_time   │   percentage │   n_splits │ mean_per_split   │
+╞═══════════════════════════╪══════════════╪════════════╪══════════════════╡
+│ 0:00:01.002417            │     0.666377 │         10 │ 0:00:00.100242   │
+├───────────────────────────┼──────────────┼────────────┼──────────────────┤
+│ 0:00:00.501861            │     0.333623 │          5 │ 0:00:00.100372   │
+╘═══════════════════════════╧══════════════╧════════════╧══════════════════╛
 
 If we actually don't care about the inner loop, we can move the ``timer[0]`` outside
 to reduce the overhead:
@@ -376,10 +374,14 @@ to reduce the overhead:
 ...     with timers[1]:
 ...         sleep(0.1)
 ...
->>> pd.DataFrame(timers.get_statistics())
-  cumulative_elapsed_time  percentage  n_splits  mean_per_split
-0         00:00:01.002816    0.666471         5 00:00:00.200563
-1         00:00:00.501850    0.333529         5 00:00:00.100370
+>>> print(timers.format_statistics())
+╒═══════════════════════════╤══════════════╤════════════╤══════════════════╕
+│ cumulative_elapsed_time   │   percentage │   n_splits │ mean_per_split   │
+╞═══════════════════════════╪══════════════╪════════════╪══════════════════╡
+│ 0:00:01.003944            │      0.66679 │          5 │ 0:00:00.200789   │
+├───────────────────────────┼──────────────┼────────────┼──────────────────┤
+│ 0:00:00.501694            │      0.33321 │          5 │ 0:00:00.100339   │
+╘═══════════════════════════╧══════════════╧════════════╧══════════════════╛
 
 Like we said previously, if the inner loop is very fast, and we run it much more times
 than other lines, its running time will be overestimated:
@@ -400,14 +402,22 @@ than other lines, its running time will be overestimated:
 ...     with timers2[1]:
 ...         sleep(0.1)
 ...
->>> pd.DataFrame(timers1.get_statistics())
-  cumulative_elapsed_time  percentage  n_splits  mean_per_split
-0         00:00:00.479970    0.489214    500000 00:00:00.000001
-1         00:00:00.501135    0.510786         5 00:00:00.100227
->>> pd.DataFrame(timers2.get_statistics())
-  cumulative_elapsed_time  percentage  n_splits  mean_per_split
-0         00:00:00.098682    0.164432         5 00:00:00.019736
-1         00:00:00.501455    0.835568         5 00:00:00.100291
+>>> print(timers1.format_statistics())
+╒═══════════════════════════╤══════════════╤════════════╤══════════════════╕
+│ cumulative_elapsed_time   │   percentage │   n_splits │ mean_per_split   │
+╞═══════════════════════════╪══════════════╪════════════╪══════════════════╡
+│ 0:00:00.558187            │     0.526846 │     500000 │ 0:00:00.000001   │
+├───────────────────────────┼──────────────┼────────────┼──────────────────┤
+│ 0:00:00.501300            │     0.473154 │          5 │ 0:00:00.100260   │
+╘═══════════════════════════╧══════════════╧════════════╧══════════════════╛
+>>> print(timers2.format_statistics())
+╒═══════════════════════════╤══════════════╤════════════╤══════════════════╕
+│ cumulative_elapsed_time   │   percentage │   n_splits │ mean_per_split   │
+╞═══════════════════════════╪══════════════╪════════════╪══════════════════╡
+│ 0:00:00.068416            │     0.120047 │          5 │ 0:00:00.013683   │
+├───────────────────────────┼──────────────┼────────────┼──────────────────┤
+│ 0:00:00.501496            │     0.879953 │          5 │ 0:00:00.100299   │
+╘═══════════════════════════╧══════════════╧════════════╧══════════════════╛
 
 We can notice a big difference between ``timers1`` and ``timers2``.
 ``timers2`` is more reasonable if we are finding the bottleneck of the code
