@@ -3,6 +3,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import datetime
 
 from six.moves import UserList, range
+from tabulate import tabulate
 
 from . import Stopwatch
 from .utils import div_timedelta
@@ -95,3 +96,14 @@ class MultiStopwatch(UserList):
             "n_splits": self.get_n_splits(),
             "mean_per_split": self.get_mean_per_split(),
         }
+
+    def format_statistics(self, tablefmt="fancy_grid"):
+        """Format the statistics using tabulate.
+
+        Parameters
+        ----------
+        tablefmt: str
+            See the available options in
+            `tabulate's documentation <https://github.com/astanin/python-tabulate#table-format>`_.
+        """
+        return tabulate(self.get_statistics(), headers="keys", tablefmt=tablefmt)
