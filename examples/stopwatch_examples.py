@@ -133,6 +133,15 @@ def cumulative_elapsed_time_example():
     # 0:00:02....
 
 
+def exception_example():
+    print("[exception_example]")
+    try:
+        with Stopwatch():
+            raise ValueError("example error")
+    except ValueError:
+        pass
+
+
 def main():
     basic_example()
     print()
@@ -155,6 +164,8 @@ def main():
     logging_level_example()
     print()
     cumulative_elapsed_time_example()
+    print()
+    exception_example()
 
 
 if __name__ == "__main__":
