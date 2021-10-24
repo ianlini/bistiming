@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    tags: ["*"]
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["2.7", "3.6", "3.7", "3.8", "3.9", "3.10"]
+        toxenv: [py]
+        include:
+          - python: "3.10"
+            toxenv: flake8
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    - run: python -m pip install --upgrade pip wheel setuptools
+    - run: python -m pip install --upgrade tox poetry
+    - run: tox -e ${{ matrix.toxenv }}
+  all-tests-succeeded:
+    # https://github.community/t/is-it-possible-to-require-all-github-actions-tasks-to-pass-without-enumerating-them/117957/4?u=graingert
+    runs-on: ubuntu-20.04
+    needs: [test]
+    steps:
+    - name: All tests succeeded
+      run: echo "🎉"
