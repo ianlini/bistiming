@@ -18,22 +18,22 @@ tabulate = "^0.8.7"
 
 [tool.poetry.dev-dependencies]
 pytest = { version = "^6.0", python = "^3.8" }
-flake8 = { version = "^3.8", python = "^3.8" }
-pep8-naming = { version = "^0.11.1", python = "^3.8"}
+flake8 = { version = "^4.0", python = "^3.8" }
+pep8-naming = { version = "^0.12.1", python = "^3.8"}
 flake8-import-order = { version = "^0.18.1", python = "^3.8"}
-flake8-bugbear = { version = "^20.1.4", python = "^3.8"}
+flake8-bugbear = { version = "^21.9.2", python = "^3.8"}
 flake8-comprehensions = { version = "^3.2.3", python = "^3.8"}
 flake8-docstrings = { version = "^1.5.0", python = "^3.8"}
 flake8-logging-format = { version = "^0.6.0", python = "^3.8"}
 flake8-return = { version = "^1.1.2", python = "^3.8"}
 flake8-black = { version = "^0.2.1", python = "^3.8"}
 tox = { version = "^3.19", python = "^3.8" }
-coverage = { version = "^5.2", python = "^3.8" }
-black = { version = "=20.8b1", python = "^3.8" }
+coverage = { version = "^6.0", python = "^3.8" }
+black = { version = "=21.9b0", python = "^3.8" }
 rstcheck = { version = "^3.3.1", python = "^3.8" }
-docutils = { version = "^0.16", python = "^3.8" }
-sphinx = { version = "^3.2.1", python = "^3.8"}
-sphinx-rtd-theme = { version = "^0.5.0", python = "^3.8"}
+docutils = { version = "^0.17", python = "^3.8" }
+sphinx = { version = "^4.2.0", python = "^3.8"}
+sphinx-rtd-theme = { version = "^1.0.0", python = "^3.8"}
 
 [tool.black]
 target-version = ['py38']
