@@ -15,6 +15,7 @@ classifiers = [
 python = "~2.7 || ^3.5"
 six = "^1.12"
 tabulate = "^0.8.7"
+importlib-metadata = {version = "*", python = "<3.8"}
 
 [tool.poetry.dev-dependencies]
 pytest = { version = "^6.0", python = "^3.8" }
