@@ -16,7 +16,7 @@ jobs:
         include:
           - python: "3.13"
             toxenv: flake8
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -27,7 +27,7 @@ jobs:
     - run: tox -e ${{ matrix.toxenv }}
   all-tests-succeeded:
     # https://github.community/t/is-it-possible-to-require-all-github-actions-tasks-to-pass-without-enumerating-them/117957/4?u=graingert
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: [test]
     steps:
     - name: All tests succeeded
