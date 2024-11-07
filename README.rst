@@ -18,10 +18,10 @@ lot of code snippets, but none of them is powerful or convenient enough to do ou
 jobs.
 BisTiming aims at implementing all the missing functions in those code snippets and
 prevents us from reinventing the wheel.
-It is very useful when we want to log something with some timing information or 
+It is very useful when we want to log something with some timing information or
 optimize the performance of our code.
 
-This package is tested with Python 2.7, 3.5, 3.6 and 3.7, but might also work in other
+This package is tested with Python 3.8 to 3.14, but might also work in other
 Python versions.
 
 .. contents::

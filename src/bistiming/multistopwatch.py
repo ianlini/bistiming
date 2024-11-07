@@ -74,12 +74,14 @@ class MultiStopwatch(UserList):
         mean_elapsed_time_per_split : List[datetime.timedelta]
         """
         return [
-            div_timedelta(
-                sum(stopwatch.split_elapsed_time, datetime.timedelta()),
-                len(stopwatch.split_elapsed_time),
+            (
+                div_timedelta(
+                    sum(stopwatch.split_elapsed_time, datetime.timedelta()),
+                    len(stopwatch.split_elapsed_time),
+                )
+                if stopwatch.split_elapsed_time
+                else datetime.timedelta()
             )
-            if stopwatch.split_elapsed_time
-            else datetime.timedelta()
             for stopwatch in self
         ]
 
